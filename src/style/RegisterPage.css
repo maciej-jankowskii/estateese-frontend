@@ -1,0 +1,44 @@
+.main-content-register{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.main-content-register h2{
+    text-align: center;
+    margin: 20px 0;
+    text-transform: uppercase;
+    color: white;
+}
+
+.register-form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 500px;
+    width: 800px;
+    background-image: linear-gradient(
+			-90deg,
+			rgba(212, 209, 209, 0.9),
+			rgba(255, 255, 255, 0.4)
+		);
+    border-radius: 15px;
+}
+
+.input-box-register{
+    width: 40%;
+    
+    
+}
+
+.register-btn{
+    width: 30%;
+    background: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+
+}

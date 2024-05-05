@@ -1,0 +1,56 @@
+.main-content-apartment{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    font-size: 12px;
+  }
+  
+  .apartments-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .apartments-table th,
+  .apartments-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .apartments-table th {
+    background-color: white;
+    font-weight: bold;
+  }
+  
+  .apartments-table tbody tr {
+    background-color: #f2f2f2;
+  }
+  
+  .apartments-table tbody tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .action-btns{
+    background: none;
+    border: 1px solid black;
+    padding: 5px 15px;
+    margin: 0 5px 0 0;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .action-btns:hover{
+    background-color: black;
+    color: white;
+  }
