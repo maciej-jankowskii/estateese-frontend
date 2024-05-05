@@ -4,10 +4,11 @@ class ApartmentService{
     static BASE_URL = "http://localhost:8080/apartment";
 
 
-    static async getAllApartments(token){
+    static async getAllApartments(token, page, pageSize){
         try{
             const response = await axios.get(`${ApartmentService.BASE_URL}/getAll`, {
-                headers: {Authorization: `Bearer ${token}`}
+                headers: {Authorization: `Bearer ${token}`},
+                params: {page, size: pageSize}
             })
             console.log(response);
             return response;
