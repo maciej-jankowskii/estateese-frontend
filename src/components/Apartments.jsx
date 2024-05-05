@@ -26,12 +26,12 @@ function Apartments() {
 	};
 
 	const nextPage = () => {
-        setPage(page + 1); // Zwiększ numer strony
+        setPage(page + 1); 
     };
 
     const prevPage = () => {
         if (page > 0) {
-            setPage(page - 1); // Zmniejsz numer strony, ale tylko jeśli nie jesteśmy na pierwszej stronie
+            setPage(page - 1); 
         }
     };
 
@@ -39,7 +39,7 @@ function Apartments() {
 		<div className="main-content">
 			<div className="main-content-apartment">
 				<div className="table-container">
-					<button>Add apartment</button>
+					<Link to='/add-apartment'>Add apartment</Link>
 					<table className="apartments-table">
 						<thead>
 							<tr>

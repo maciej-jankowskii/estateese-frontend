@@ -12,6 +12,7 @@ import Commercials from "./components/Commercials";
 import Houses from "./components/Houses";
 import Lands from "./components/Lands";
 import Offers from "./components/Offers";
+import AddApartment from "./components/AddApartment";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 
 				<Route path="/apartments" element={<Apartments></Apartments>}></Route>
 				<Route path="apartment/:id" element={<ApartmentDetails></ApartmentDetails>}></Route>
+				<Route path="/add-apartment" element={<AddApartment></AddApartment>}></Route>
 				<Route path="/commercial" element={<Commercials></Commercials>}></Route>
 				<Route path="/houses" element={<Houses></Houses>}></Route>
 				<Route path="/lands" element={<Lands></Lands>}></Route>
