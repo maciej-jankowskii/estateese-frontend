@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ApartmentService from "../service/ApartmentService";
-import Standard from "../const/Standard";
-import BuildingType from "../const/BuildingType";
+import ApartmentService from "../../service/ApartmentService";
+import Standard from "../../const/Standard";
+import BuildingType from "../../const/BuildingType";
+import '../../style/PostStyle.css'
 
 function AddApartment() {
 	const [apartmentData, setApartmentData] = useState({
@@ -20,7 +21,6 @@ function AddApartment() {
 		garage: false,
 		yearOfConstruction: "",
 		standard: "",
-
 	});
 
 	const navi = useNavigate();
@@ -30,10 +30,10 @@ function AddApartment() {
 		setApartmentData({ ...apartmentData, [name]: value });
 	};
 
-    const handleCheckboxChange = (e) => {
-        const { name, checked } = e.target;
-        setApartmentData({ ...apartmentData, [name]: checked });
-    };
+	const handleCheckboxChange = (e) => {
+		const { name, checked } = e.target;
+		setApartmentData({ ...apartmentData, [name]: checked });
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -49,10 +49,12 @@ function AddApartment() {
 
 	return (
 		<div className="main-content">
-			<div className="main-content-register">
-				<h2>Add new employee</h2>
-				<form onSubmit={handleSubmit} className="register-form">
-					<div className="input-box-register">
+			<div className="main-content-post">
+				<h2>Add apartment</h2>
+				<form onSubmit={handleSubmit} className="post-form">
+					<div className="apartment-post-box">
+                    <div className='first-input-box-post'>
+                    <div className="input-box-post">
 						<label htmlFor="">Address:</label>
 						<input
 							type="text"
@@ -61,7 +63,7 @@ function AddApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
 							type="number"
@@ -70,7 +72,7 @@ function AddApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
 							type="text"
@@ -79,7 +81,7 @@ function AddApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="">Area:</label>
 						<input
 							type="number"
@@ -89,7 +91,7 @@ function AddApartment() {
 						/>
 					</div>
 
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="">Rooms:</label>
 						<input
 							type="number"
@@ -99,7 +101,7 @@ function AddApartment() {
 						/>
 					</div>
 
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="">Bathrooms:</label>
 						<input
 							type="number"
@@ -108,24 +110,37 @@ function AddApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+                    </div>
+                    <div className="second-input-box-post">
 
-					<div className="input-box-register">
-						<label htmlFor="duplex">Duplex:</label>
+					<div className="input-box-post">
+						<label htmlFor="">Year of Construction:</label>
 						<input
-							type="checkbox"
-							id="duplex"
-							name="duplex"
-							checked={apartmentData.duplexApartment}
-							onChange={handleCheckboxChange}
+							type="text"
+							name="yearOfConstruction"
+							value={apartmentData.yearOfConstruction}
+							onChange={handleInputChange}
 						/>
 					</div>
 
-					<div className="input-box-register">
+					<div className="input-box-post">
+						<label htmlFor="">Floor:</label>
+						<input
+							type="number"
+							name="floor"
+							value={apartmentData.floor}
+							onChange={handleInputChange}
+						/>
+					</div>
+
+
+					<div className="input-box-post">
 						<label htmlFor="">Type of building:</label>
 						<select
 							name="buildingType"
 							value={apartmentData.buildingType}
 							onChange={handleInputChange}
+							className="select"
 						>
 							<option value="">Select building type</option>
 							{Object.values(BuildingType).map((type, index) => (
@@ -136,17 +151,38 @@ function AddApartment() {
 						</select>
 					</div>
 
-					<div className="input-box-register">
-						<label htmlFor="">Floor:</label>
-						<input
-							type="number"
-							name="floor"
-							value={apartmentData.floor}
+					<div className="input-box-post">
+						<label htmlFor="">Standard:</label>
+						<select
+							name="standard"
+							value={apartmentData.standard}
 							onChange={handleInputChange}
+							className="select"
+						>
+							<option value="">Select standard</option>
+							{Object.values(Standard).map((std, index) => (
+								<option key={index} value={std}>
+									{std}
+								</option>
+							))}
+						</select>
+					</div>
+
+					<div className="input-checkbox-group">
+					<div className="input-box-post">
+						<label htmlFor="duplex">Duplex:</label>
+						<input
+							type="checkbox"
+							id="duplex"
+							name="duplexApartment"
+							checked={apartmentData.duplexApartment}
+							onChange={handleCheckboxChange}
 						/>
 					</div>
 
-					<div className="input-box-register">
+					
+
+					<div className="input-box-post">
 						<label htmlFor="elevator">Elevator:</label>
 						<input
 							type="checkbox"
@@ -157,7 +193,7 @@ function AddApartment() {
 						/>
 					</div>
 
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="balcony">Balcony:</label>
 						<input
 							type="checkbox"
@@ -168,7 +204,7 @@ function AddApartment() {
 						/>
 					</div>
 
-					<div className="input-box-register">
+					<div className="input-box-post">
 						<label htmlFor="garage">Garage:</label>
 						<input
 							type="checkbox"
@@ -178,38 +214,23 @@ function AddApartment() {
 							onChange={handleCheckboxChange}
 						/>
 					</div>
-
-					<div className="input-box-register">
-						<label htmlFor="">Year of Construction:</label>
-						<input
-							type="text"
-							name="yearOfConstruction"
-							value={apartmentData.yearOfConstruction}
-							onChange={handleInputChange}
-						/>
 					</div>
 
-					<div className="input-box-register">
-						<label htmlFor="">Standard:</label>
-						<select
-							name="standard"
-							value={apartmentData.standard}
-							onChange={handleInputChange}
-						>
-							<option value="">Select standard</option>
-							{Object.values(Standard).map((std, index) => (
-								<option key={index} value={std}>
-									{std}
-								</option>
-							))}
-						</select>
-					</div>
-					<button type="submit" className="register-btn">
+
+					
+
+				
+                    </div>
+                    </div>
+
+					
+					<button type="submit" className="my-btn">
 						Add
 					</button>
 				</form>
 			</div>
 		</div>
+		
 	);
 }
 

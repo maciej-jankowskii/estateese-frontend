@@ -1,18 +1,19 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LoginPage from "./components/LoginPage";
-import HomeComponent from "./components/HomePage";
-import Apartments from "./components/Apartments";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import RegisterPage from "./components/RegisterPage";
-import Clients from "./components/Clients";
-import ApartmentDetails from "./components/ApartmentDetails";
-import Commercials from "./components/Commercials";
-import Houses from "./components/Houses";
-import Lands from "./components/Lands";
-import Offers from "./components/Offers";
-import AddApartment from "./components/AddApartment";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./components/common/LoginPage";
+import HomeComponent from "./components/common/HomePage";
+import Apartments from "./components/apartments/Apartments";
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/Footer";
+import RegisterPage from "./components/employee-register/RegisterPage";
+import Clients from "./components/company-clients/Clients";
+import ApartmentDetails from "./components/apartments/ApartmentDetails";
+import Commercials from "./components/commercial/Commercials";
+import Houses from "./components/houses/Houses";
+import Lands from "./components/lands/Lands";
+import Offers from "./components/offers/Offers";
+import AddApartment from "./components/apartments/AddApartment";
+import UpdateApartment from "./components/apartments/UpdateApartment";
 
 function App() {
 	return (
@@ -24,8 +25,18 @@ function App() {
 				<Route path="/home/" element={<HomeComponent></HomeComponent>}></Route>
 
 				<Route path="/apartments" element={<Apartments></Apartments>}></Route>
-				<Route path="apartment/:id" element={<ApartmentDetails></ApartmentDetails>}></Route>
-				<Route path="/add-apartment" element={<AddApartment></AddApartment>}></Route>
+				<Route
+					path="apartment/:id"
+					element={<ApartmentDetails></ApartmentDetails>}
+				></Route>
+				<Route
+					path="/add-apartment"
+					element={<AddApartment></AddApartment>}
+				></Route>
+				<Route
+					path="/update-apartment/:id"
+					element={<UpdateApartment></UpdateApartment>}
+				></Route>
 				<Route path="/commercial" element={<Commercials></Commercials>}></Route>
 				<Route path="/houses" element={<Houses></Houses>}></Route>
 				<Route path="/lands" element={<Lands></Lands>}></Route>

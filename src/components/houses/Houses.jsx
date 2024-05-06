@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import HousesService from "../service/HousesService";
+import HousesService from "../../service/HousesService";
+import '../../style/TablesStyle.css'
+import { Link } from "react-router-dom";
 
 function Houses() {
 	const [houses, setHouses] = useState([]);
@@ -20,10 +22,11 @@ function Houses() {
 
 	return (
 		<div className="main-content">
-			<div className="main-content-apartment">
+			<div className="main-content-table">
+			<Link  className='add-resource-btn 'to="/add-house">Add house</Link>
 				<div className="table-container">
-					<button>Add house</button>
-					<table className="apartments-table">
+					
+					<table className="box-table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -33,7 +36,7 @@ function Houses() {
 							</tr>
 						</thead>
 						<tbody>
-                            =
+							=
 							{houses.map((house) => (
 								<tr key={house.id}>
 									<td>{house.id}</td>

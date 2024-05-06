@@ -43,6 +43,36 @@ class ApartmentService{
         }
     }
 
+    static async updateApartment(id, apartmentData, token){
+        try{
+            const response = await axios.put(`${ApartmentService.BASE_URL}/update-apartment/${id}`, apartmentData,
+                {
+                    headers: {Authorization: `Bearer ${token}`}
+                }
+            )
+            return response;
+        }catch(error){
+            console.log(error);
+            throw error;
+        }
+    }
+
+    static async deleteApartment(id, token){
+        try{
+            const response = await axios.delete(`${ApartmentService.BASE_URL}/delete-apartment/${id}`,
+                {
+                    headers: {Authorization: `Bearer ${token}`}
+                }
+            )
+            return response;
+        }catch(error){
+            console.log(error);
+            throw error;
+        }
+    }
+
+
+
 
 
 }

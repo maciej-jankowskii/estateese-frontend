@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import "../style/Apartments.css";
-import ApartmentService from "../service/ApartmentService";
+import ApartmentService from "../../service/ApartmentService";
 import { Link } from "react-router-dom";
+import "../../style/TablesStyle.css";
+
 function Apartments() {
 	const [apartments, setApartments] = useState([]);
-	const [page, setPage] = useState(0); 
-    const [pageSize, setPageSize] = useState(5);
+	const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(5);
 
 	useEffect(() => {
 		fetchApartments();
@@ -26,21 +27,34 @@ function Apartments() {
 	};
 
 	const nextPage = () => {
-        setPage(page + 1); 
-    };
+		setPage(page + 1);
+	};
 
-    const prevPage = () => {
-        if (page > 0) {
-            setPage(page - 1); 
-        }
-    };
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
+
+	const deleteApartment = async (id) => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			console.log(id);
+			await ApartmentService.deleteApartment(id, token);
+			fetchApartments();
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<div className="main-content">
-			<div className="main-content-apartment">
+			<div className="main-content-table">
+				<Link className="add-resource-btn " to="/add-apartment">
+					Add apartment
+				</Link>
 				<div className="table-container">
-					<Link to='/add-apartment'>Add apartment</Link>
-					<table className="apartments-table">
+					<table className="box-table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -62,17 +76,26 @@ function Apartments() {
 										>
 											Details
 										</Link>
-										<button className="action-btns">Update</button>
-										<button className="action-btns">Delete</button>
+										<Link
+											className="action-btns"
+											to={`/update-apartment/${apartment.id}`}
+										>
+											Update
+										</Link>
+										<Link
+											className="action-btns"
+											onClick={() => deleteApartment(apartment.id)}
+										>
+											Delete
+										</Link>
 									</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
-					<div>
+					<div className="page-btns">
 						<button onClick={prevPage}>Previous Page</button>
 						<button onClick={nextPage}>Next Page</button>
-						{/* Reszta komponentu */}
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,39 @@
+  
+  .details-box {
+    width: 60%;
+    min-height:45%;
+    background-image: linear-gradient(
+      -90deg,
+      rgba(212, 209, 209, 0.9),
+      rgba(255, 255, 255, 0.4)
+    );
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .details-box h2 {
+    color: black;
+    margin-bottom: 20px;
+  }
+  
+  .details-box p {
+    margin-bottom: 12px;
+  }
+  
+  .back-btn {
+    padding: 8px 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    background-color: #555;
+  }
+  

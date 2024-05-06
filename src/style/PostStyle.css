@@ -1,0 +1,84 @@
+.main-content-post {
+	background-image: linear-gradient(
+		-90deg,
+		rgba(212, 209, 209, 0.9),
+		rgba(255, 255, 255, 0.4)
+	);
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.main-content-post h2 {
+	color: black;
+	margin-bottom: 20px;
+}
+
+.post-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input-box-post {
+	margin-bottom: 20px;
+	text-align: left;
+}
+
+.input-box-post label {
+	display: block;
+	margin-bottom: 5px;
+	color: #555;
+}
+
+.input-box-post input {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+}
+
+.my-btn {
+	padding: 10px 20px;
+	background: none;
+	color: black;
+	border: 1px solid white;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: background-color 0.3s ease;
+}
+
+.my-btn:hover {
+	background-color: black;
+	color: white;
+}
+
+.apartment-post-box {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.first-input-box-post {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: white;
+}
+
+.input-checkbox-group {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
