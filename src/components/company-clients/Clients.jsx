@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ClientService from "../../service/ClientService";
-import '../../style/TablesStyle.css'
+import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
 
 function Clients() {
@@ -20,13 +20,24 @@ function Clients() {
 		}
 	};
 
+	const deleteClient = async(id) =>{
+		try{
+			const token = localStorage.getItem('accessToken');
+			await ClientService.deleteClient(id, token);
+			fetchClients();
+		}catch(error){
+			console.log(error);
+		}
+
+	}
+
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
-
-				<Link className="add-resource-btn" to='/add-client'>Add client</Link>
+				<Link className="add-resource-btn" to="/add-client">
+					Add client
+				</Link>
 				<div className="table-container">
-					
 					<table className="box-table">
 						<thead>
 							<tr>
@@ -47,9 +58,22 @@ function Clients() {
 									<td>{client.telephone}</td>
 									<td>{client.email}</td>
 									<td>
-										<button className="action-btns">Client offers</button>
-										<button className="action-btns">Update</button>
-										<button className="action-btns">Delete</button>
+										<Link
+											to={`/offer/client/${client.id}`}
+											className="action-btns"
+										>
+											Client offer
+										</Link>
+										<Link
+											to={`/update-client/${client.id}`}
+											className="action-btns"
+										>
+											Update
+										</Link>
+
+										<Link className="action-btns" onClick={() => deleteClient(client.id)}>
+										Delete
+										</Link>
 									</td>
 								</tr>
 							))}

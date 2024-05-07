@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 class ApartmentService{
-    static BASE_URL = "http://localhost:8080/apartment";
+    static BASE_URL = "http://localhost:8080/api/apartments";
 
 
     static async getAllApartments(token, page, pageSize){
         try{
-            const response = await axios.get(`${ApartmentService.BASE_URL}/getAll`, {
+            const response = await axios.get(`${ApartmentService.BASE_URL}`, {
                 headers: {Authorization: `Bearer ${token}`},
                 params: {page, size: pageSize}
             })

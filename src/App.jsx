@@ -14,6 +14,9 @@ import Lands from "./components/lands/Lands";
 import Offers from "./components/offers/Offers";
 import AddApartment from "./components/apartments/AddApartment";
 import UpdateApartment from "./components/apartments/UpdateApartment";
+import AddClient from "./components/company-clients/AddClient";
+import ClientOffers from "./components/company-clients/ClientOffers";
+import UpdateClient from "./components/company-clients/UpdateClient";
 
 function App() {
 	return (
@@ -43,6 +46,10 @@ function App() {
 				<Route path="/offers" element={<Offers></Offers>}></Route>
 				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
 				<Route path="/clients" element={<Clients></Clients>}></Route>
+				<Route path="/add-client" element={<AddClient></AddClient>}></Route>
+				<Route path="/offer/client/:id" element={<ClientOffers></ClientOffers>}></Route>
+				<Route path="/update-client/:id" element={<UpdateClient></UpdateClient>}></Route>
+	
 			</Routes>
 
 			<Footer></Footer>
