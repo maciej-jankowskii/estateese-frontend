@@ -26,6 +26,18 @@ function Apartments() {
 		}
 	};
 
+
+
+	const deleteApartment = async (id) => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			await ApartmentService.deleteApartment(id, token);
+			fetchApartments();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const nextPage = () => {
 		setPage(page + 1);
 	};
@@ -33,17 +45,6 @@ function Apartments() {
 	const prevPage = () => {
 		if (page > 0) {
 			setPage(page - 1);
-		}
-	};
-
-	const deleteApartment = async (id) => {
-		try {
-			const token = localStorage.getItem("accessToken");
-			console.log(id);
-			await ApartmentService.deleteApartment(id, token);
-			fetchApartments();
-		} catch (error) {
-			console.log(error);
 		}
 	};
 

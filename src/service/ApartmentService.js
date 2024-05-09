@@ -10,7 +10,6 @@ class ApartmentService{
                 headers: {Authorization: `Bearer ${token}`},
                 params: {page, size: pageSize}
             })
-            console.log(response);
             return response;
         }catch(error){
             console.log(error);

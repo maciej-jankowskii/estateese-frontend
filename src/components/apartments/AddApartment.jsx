@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApartmentService from "../../service/ApartmentService";
 import Standard from "../../const/Standard";

@@ -17,6 +17,9 @@ import UpdateApartment from "./components/apartments/UpdateApartment";
 import AddClient from "./components/company-clients/AddClient";
 import ClientOffers from "./components/company-clients/ClientOffers";
 import UpdateClient from "./components/company-clients/UpdateClient";
+import AddCommercial from "./components/commercial/AddCommercial";
+import CommercialDetails from "./components/commercial/CommercialDetails";
+import UpdateCommercial from "./components/commercial/UpdateCommercial";
 
 function App() {
 	return (
@@ -40,7 +43,16 @@ function App() {
 					path="/update-apartment/:id"
 					element={<UpdateApartment></UpdateApartment>}
 				></Route>
-				<Route path="/commercial" element={<Commercials></Commercials>}></Route>
+				<Route path="/commercials" element={<Commercials></Commercials>}></Route>
+				<Route path="/add-commercial" element={<AddCommercial></AddCommercial>}></Route>
+				<Route
+					path="commercial/:id"
+					element={<CommercialDetails></CommercialDetails>}
+				></Route>
+				<Route
+					path="/update-commercial/:id"
+					element={<UpdateCommercial></UpdateCommercial>}
+				></Route>
 				<Route path="/houses" element={<Houses></Houses>}></Route>
 				<Route path="/lands" element={<Lands></Lands>}></Route>
 				<Route path="/offers" element={<Offers></Offers>}></Route>

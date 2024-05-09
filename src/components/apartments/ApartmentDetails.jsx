@@ -31,7 +31,7 @@ function ApartmentDetails() {
 	const fetchApartmentById = async (id) => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			console.log(token);
+			
 			const response = await ApartmentService.getApartmentById(token, id);
 			const {
 				address,
