@@ -62,7 +62,7 @@ function Clients() {
 											to={`/offer/client/${client.id}`}
 											className="action-btns"
 										>
-											Client offer
+											Client offers
 										</Link>
 										<Link
 											to={`/update-client/${client.id}`}

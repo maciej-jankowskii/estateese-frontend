@@ -64,6 +64,7 @@ function UpdateCommercial() {
         try{
             const token = localStorage.getItem('accessToken');
             const response = await CommercialPropertyService.updateCommercialProperty(id, commercialData, token);
+            console.log(response);
             navi('/commercials')
         } catch(error){
             console.log(error);

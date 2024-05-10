@@ -96,6 +96,7 @@ function UpdateApartment() {
 				apartmentData,
 				token
 			);
+			console.log(response);
 			navi("/apartments");
 		} catch (error) {
 			console.log(error);

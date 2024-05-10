@@ -20,6 +20,9 @@ import UpdateClient from "./components/company-clients/UpdateClient";
 import AddCommercial from "./components/commercial/AddCommercial";
 import CommercialDetails from "./components/commercial/CommercialDetails";
 import UpdateCommercial from "./components/commercial/UpdateCommercial";
+import AddHouse from "./components/houses/AddHouse";
+import HouseDetails from "./components/houses/HouseDetails";
+import UpdateHouse from "./components/houses/UpdateHouse";
 
 function App() {
 	return (
@@ -54,6 +57,9 @@ function App() {
 					element={<UpdateCommercial></UpdateCommercial>}
 				></Route>
 				<Route path="/houses" element={<Houses></Houses>}></Route>
+				<Route path="/add-house" element={<AddHouse></AddHouse>}></Route>
+				<Route path="/house/:id" element={<HouseDetails></HouseDetails>}> </Route>
+				<Route path="/update-house/:id" element={<UpdateHouse></UpdateHouse>}></Route>
 				<Route path="/lands" element={<Lands></Lands>}></Route>
 				<Route path="/offers" element={<Offers></Offers>}></Route>
 				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>

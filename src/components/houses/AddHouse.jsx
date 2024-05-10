@@ -1,56 +1,66 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ApartmentService from "../../service/ApartmentService";
-import Standard from "../../const/Standard";
-import BuildingType from "../../const/BuildingType";
-import '../../style/PostStyle.css'
+import { useState } from 'react'
+import BuildingType from '../../const/BuildingType'
+import Standard from '../../const/Standard';
+import "../../style/PostStyle.css"
+import { useNavigate } from 'react-router-dom';
+import HousesService from '../../service/HousesService';
 
-function AddApartment() {
-	const [apartmentData, setApartmentData] = useState({
-		address: "",
+function AddHouse() {
+
+  const [houseData, setHouseData] = useState({
+    address: "",
 		price: "",
 		description: "",
-		area: "",
-		rooms: "",
-		bathrooms: "",
-		duplexApartment: false,
-		buildingType: "",
-		floor: "",
-		elevator: false,
-		balcony: false,
-		garage: false,
-		yearOfConstruction: "",
-		standard: "",
-	});
+    landArea: "",
+    houseArea: "",
+    rooms: "",
+    bathrooms: "",
+    balcony: "",
+    garage: "",
+    twoStoryHouse: "",
+    buildingType: "",
+    yearOfConstruction: "",
+    standard: ""
+  })
 
-	const navi = useNavigate();
+  const navi = useNavigate();
 
-	const handleInputChange = (e) => {
-		const { name, value } = e.target;
-		setApartmentData({ ...apartmentData, [name]: value });
-	};
 
-	const handleCheckboxChange = (e) => {
-		const { name, checked } = e.target;
-		setApartmentData({ ...apartmentData, [name]: checked });
-	};
+  const handleInputChange = (e) => {
+    const {name, value} = e.target;
+    setHouseData({...houseData, [name]: value});
+  }
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+  const handleCheckboxChange = (e) => {
+    const {name, checked} = e.target;
+    setHouseData({...houseData, [name]: checked})
+  }
 
-		try {
-			const token = localStorage.getItem("accessToken");
-			await ApartmentService.addApartment(apartmentData, token);
-			navi("/apartments");
-		} catch (error) {
-			console.log(error);
-		}
-	};
 
-	return (
-		<div className="main-content">
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      const token = localStorage.getItem('accessToken');
+      await HousesService.addHouse(houseData, token)
+      navi('/houses')
+    }catch(error){
+      console.log(error);
+
+    }
+  }
+
+
+
+    
+
+
+
+
+
+  return (
+    <div className="main-content">
 			<div className="main-content-post">
-				<h2>Add apartment</h2>
+				<h2>Add house</h2>
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -59,7 +69,7 @@ function AddApartment() {
 						<input
 							type="text"
 							name="address"
-							value={apartmentData.address}
+							value={houseData.address}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -68,7 +78,7 @@ function AddApartment() {
 						<input
 							type="number"
 							name="price"
-							value={apartmentData.price}
+							value={houseData.price}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -77,16 +87,26 @@ function AddApartment() {
 						<input
 							type="text"
 							name="description"
-							value={apartmentData.description}
+							value={houseData.description}
 							onChange={handleInputChange}
 						/>
 					</div>
 					<div className="input-box-post">
-						<label htmlFor="">Area:</label>
+						<label htmlFor="">Land area:</label>
 						<input
 							type="number"
-							name="area"
-							value={apartmentData.area}
+							name="landArea"
+							value={houseData.landArea}
+							onChange={handleInputChange}
+						/>
+					</div>
+
+          <div className="input-box-post">
+						<label htmlFor="">House area:</label>
+						<input
+							type="number"
+							name="houseArea"
+							value={houseData.houseArea}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -96,7 +116,7 @@ function AddApartment() {
 						<input
 							type="number"
 							name="rooms"
-							value={apartmentData.rooms}
+							value={houseData.rooms}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -106,29 +126,19 @@ function AddApartment() {
 						<input
 							type="number"
 							name="bathrooms"
-							value={apartmentData.bathrooms}
+							value={houseData.bathrooms}
 							onChange={handleInputChange}
 						/>
 					</div>
                     </div>
                     <div className="second-input-box-post">
 
-					<div className="input-box-post">
+            <div className="input-box-post">
 						<label htmlFor="">Year of Construction:</label>
 						<input
 							type="text"
 							name="yearOfConstruction"
-							value={apartmentData.yearOfConstruction}
-							onChange={handleInputChange}
-						/>
-					</div>
-
-					<div className="input-box-post">
-						<label htmlFor="">Floor:</label>
-						<input
-							type="number"
-							name="floor"
-							value={apartmentData.floor}
+							value={houseData.yearOfConstruction}
 							onChange={handleInputChange}
 						/>
 					</div>
@@ -138,7 +148,7 @@ function AddApartment() {
 						<label htmlFor="">Type of building:</label>
 						<select
 							name="buildingType"
-							value={apartmentData.buildingType}
+							value={houseData.buildingType}
 							onChange={handleInputChange}
 							className="select"
 						>
@@ -155,7 +165,7 @@ function AddApartment() {
 						<label htmlFor="">Standard:</label>
 						<select
 							name="standard"
-							value={apartmentData.standard}
+							value={houseData.standard}
 							onChange={handleInputChange}
 							className="select"
 						>
@@ -170,39 +180,17 @@ function AddApartment() {
 
 					<div className="input-checkbox-group">
 					<div className="input-box-post">
-						<label htmlFor="duplex">Duplex:</label>
-						<input
-							type="checkbox"
-							id="duplex"
-							name="duplexApartment"
-							checked={apartmentData.duplexApartment}
-							onChange={handleCheckboxChange}
-						/>
-					</div>
-
-					
-
-					<div className="input-box-post">
-						<label htmlFor="elevator">Elevator:</label>
-						<input
-							type="checkbox"
-							id="elevator"
-							name="elevator"
-							checked={apartmentData.elevator}
-							onChange={handleCheckboxChange}
-						/>
-					</div>
-
-					<div className="input-box-post">
-						<label htmlFor="balcony">Balcony:</label>
+						<label htmlFor="duplex">Balcony:</label>
 						<input
 							type="checkbox"
 							id="balcony"
 							name="balcony"
-							checked={apartmentData.balcony}
+							checked={houseData.balcony}
 							onChange={handleCheckboxChange}
 						/>
 					</div>
+
+				
 
 					<div className="input-box-post">
 						<label htmlFor="garage">Garage:</label>
@@ -210,13 +198,27 @@ function AddApartment() {
 							type="checkbox"
 							id="garage"
 							name="garage"
-							checked={apartmentData.garage}
+							checked={houseData.garage}
+							onChange={handleCheckboxChange}
+						/>
+					</div>
+
+          <div className="input-box-post">
+						<label htmlFor="garage">Two story house:</label>
+						<input
+							type="checkbox"
+							id="twoStoryHouse"
+							name="twoStoryHouse"
+							checked={houseData.twoStoryHouse}
 							onChange={handleCheckboxChange}
 						/>
 					</div>
 					</div>
 
 
+					
+
+				
                     </div>
                     </div>
 
@@ -227,8 +229,8 @@ function AddApartment() {
 				</form>
 			</div>
 		</div>
-		
-	);
+    
+  )
 }
 
-export default AddApartment;
+export default AddHouse
