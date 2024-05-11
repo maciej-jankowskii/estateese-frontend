@@ -2,12 +2,13 @@ import axios from "axios";
 
 class ClientService{
     static BASE_URL = "http://localhost:8080/api/clients";
-    static URL_FOR_CLIENT_OFFER = "http://localhost:8080/offer/client"
+    static URL_FOR_CLIENT_OFFER = "http://localhost:8080/api/offers/client"
 
-    static async getAllClients(token){
+    static async getAllClients(token, page,  pageSize){
         try{
             const response = await axios.get(`${ClientService.BASE_URL}`, {
-                headers: {Authorization: `Bearer ${token}`}
+                headers: {Authorization: `Bearer ${token}`},
+                params: {page, size: pageSize}
             })
             return response;
         }catch(error){

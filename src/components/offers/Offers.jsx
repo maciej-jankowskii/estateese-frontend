@@ -5,20 +5,54 @@ import { Link } from "react-router-dom";
 
 function Offers() {
 	const [offers, setOffers] = useState([]);
+	const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(5);
 
 	useEffect(() => {
 		fetchOffers();
-	}, []);
+	}, [page, pageSize]);
 
 	const fetchOffers = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await OffersService.getAllOffers(token);
+			const response = await OffersService.getAllOffers(token, page, pageSize);
 			setOffers(response.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
+	const nextPage = () => {
+		setPage(page + 1);
+	};
+
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
+
+
+
+	const deleteOffer = async (id) => {
+		try{
+			const token = localStorage.getItem("accessToken")
+			await OffersService.deleteOffer(id, token);
+			fetchOffers();
+		}catch(error){
+			console.log(error);
+		}
+	}
+
+	const soldOffer = async (id) => {
+		try{
+			const token = localStorage.getItem("accessToken")
+			await OffersService.markOfferAsSold(id, token);
+			fetchOffers();
+		}catch(error){
+			console.log(error);
+		}
+	}
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
@@ -50,14 +84,19 @@ function Offers() {
 									<td>{offer.isBooked ? "Yes" : "No"}</td>
 									<td>{offer.isAvailable ? "Yes" : "No"}</td>
 									<td>
-										<button className="action-btns">Details</button>
-										<button className="action-btns">Update</button>
-										<button className="action-btns">Delete</button>
+										<Link className="action-btns" to={`/update-offer/${offer.id}`}>Update</Link>
+										<Link className="action-btns" onClick={()=> deleteOffer(offer.id)}>Delete</Link>
+										<Link className="action-btns" onClick={() => soldOffer(offer.id)}>Sold</Link>
 									</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
+
+					<div className="page-btns">
+						<button onClick={prevPage}>Previous Page</button>
+						<button onClick={nextPage}>Next Page</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -5,15 +5,19 @@ import { Link } from "react-router-dom";
 
 function Clients() {
 	const [clients, setClients] = useState([]);
+	const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(5);
+
+
 	useEffect(() => {
 		fetchClients();
-	}, []);
+	}, [page, pageSize]);
 
 	const fetchClients = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await ClientService.getAllClients(token);
-			console.log(response.data);
+			const response = await ClientService.getAllClients(token, page, pageSize);
+			
 			setClients(response.data);
 		} catch (error) {
 			console.log(error);
@@ -30,6 +34,16 @@ function Clients() {
 		}
 
 	}
+
+	const nextPage = () => {
+		setPage(page + 1);
+	};
+
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
 
 	return (
 		<div className="main-content">
@@ -79,6 +93,10 @@ function Clients() {
 							))}
 						</tbody>
 					</table>
+					<div className="page-btns">
+						<button onClick={prevPage}>Previous Page</button>
+						<button onClick={nextPage}>Next Page</button>
+					</div>
 				</div>
 			</div>
 		</div>

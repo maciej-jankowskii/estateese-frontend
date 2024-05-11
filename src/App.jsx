@@ -26,6 +26,8 @@ import HouseDetails from "./components/houses/HouseDetails";
 import UpdateHouse from "./components/houses/UpdateHouse";
 import LandDetails from "./components/lands/LandDetails";
 import UpdateLand from "./components/lands/UpdateLand";
+import AddOffer from "./components/offers/AddOffer";
+import UpdateOffer from "./components/offers/UpdateOffer";
 
 function App() {
 	return (
@@ -69,6 +71,8 @@ function App() {
 				<Route path="/update-land/:id" element={<UpdateLand></UpdateLand>}></Route>
 				
 				<Route path="/offers" element={<Offers></Offers>}></Route>
+				<Route path="/add-offer" element={<AddOffer></AddOffer>}></Route>
+				<Route path="/update-offer/:id" element={<UpdateOffer></UpdateOffer>}></Route>
 				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
 				<Route path="/clients" element={<Clients></Clients>}></Route>
 				<Route path="/add-client" element={<AddClient></AddClient>}></Route>

@@ -55,6 +55,9 @@ function Navbar() {
 						Offers
 					</Link>
 				</li>
+				<li>
+					<Link className="nav-item" to={"/reservations"}>Reservation</Link>
+				</li>
 				<li>Credit</li>
 				<li>
 					<Link className="nav-item nav-item-border" to="/" onClick={handleLogout}>
