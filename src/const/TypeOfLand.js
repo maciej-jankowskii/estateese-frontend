@@ -1,0 +1,7 @@
+const TypeOfLand ={
+    BUILDING_SITE: "BUILDING_SITE",
+    RECREATIONAL_LAND: "RECREATIONAL_LAND",
+    AGRICULTURAL_PARCEL: "AGRICULTURAL_PARCEL"
+    
+}
+export default TypeOfLand;

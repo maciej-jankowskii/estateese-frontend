@@ -11,6 +11,7 @@ import ApartmentDetails from "./components/apartments/ApartmentDetails";
 import Commercials from "./components/commercial/Commercials";
 import Houses from "./components/houses/Houses";
 import Lands from "./components/lands/Lands";
+import AddLand from './components/lands/AddLand';
 import Offers from "./components/offers/Offers";
 import AddApartment from "./components/apartments/AddApartment";
 import UpdateApartment from "./components/apartments/UpdateApartment";
@@ -23,6 +24,8 @@ import UpdateCommercial from "./components/commercial/UpdateCommercial";
 import AddHouse from "./components/houses/AddHouse";
 import HouseDetails from "./components/houses/HouseDetails";
 import UpdateHouse from "./components/houses/UpdateHouse";
+import LandDetails from "./components/lands/LandDetails";
+import UpdateLand from "./components/lands/UpdateLand";
 
 function App() {
 	return (
@@ -61,6 +64,10 @@ function App() {
 				<Route path="/house/:id" element={<HouseDetails></HouseDetails>}> </Route>
 				<Route path="/update-house/:id" element={<UpdateHouse></UpdateHouse>}></Route>
 				<Route path="/lands" element={<Lands></Lands>}></Route>
+				<Route path="/add-land" element={<AddLand></AddLand>}></Route>
+				<Route path="/land/:id" element={<LandDetails></LandDetails>}></Route>
+				<Route path="/update-land/:id" element={<UpdateLand></UpdateLand>}></Route>
+				
 				<Route path="/offers" element={<Offers></Offers>}></Route>
 				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
 				<Route path="/clients" element={<Clients></Clients>}></Route>
