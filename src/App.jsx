@@ -31,6 +31,7 @@ import UpdateOffer from "./components/offers/UpdateOffer";
 import Reservations from "./components/reservation/Reservations";
 import AddReservation from './components/reservation/AddReservation'
 import UpdateReservation from "./components/reservation/UpdateReservation";
+import Credit from "./components/credit/Credit";
 
 function App() {
 	return (
@@ -84,6 +85,7 @@ function App() {
 				<Route path="/add-client" element={<AddClient></AddClient>}></Route>
 				<Route path="/offer/client/:id" element={<ClientOffers></ClientOffers>}></Route>
 				<Route path="/update-client/:id" element={<UpdateClient></UpdateClient>}></Route>
+				<Route path="/credit" element={<Credit></Credit>}></Route>
 	
 			</Routes>
 
