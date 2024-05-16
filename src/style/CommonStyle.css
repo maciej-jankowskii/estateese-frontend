@@ -45,6 +45,7 @@
 }
 
 .error-msg {
+	font-size: 12px;
 	color: tomato;
 	font-weight: bold;
 	margin: 0 0 10px 0;

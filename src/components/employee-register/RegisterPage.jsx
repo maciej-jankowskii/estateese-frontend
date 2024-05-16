@@ -10,12 +10,19 @@ function RegisterPage() {
 		email: "",
 		password: "",
 	});
+	const [errors, setErrors] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		password: "",
+	});
 
 	const navi = useNavigate();
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setUserData({ ...userData, [name]: value });
+		setErrors({ ...errors, [name]: "" });
 	};
 
 	const handleSubmitRegister = async (e) => {
@@ -31,9 +38,15 @@ function RegisterPage() {
 				email: "",
 				password: "",
 			});
+			setErrors({})
+		
 			navi("/home");
 		} catch (error) {
-			console.log(error);
+			if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
 		}
 	};
 
@@ -41,6 +54,7 @@ function RegisterPage() {
 		<div className="main-content">
 			<div className="main-content-post">
 				<h2>Register new employee</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmitRegister} className="post-form">
 					<div className="input-box-post">
 						<label htmlFor="">Name:</label>
@@ -51,6 +65,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
+						{errors.firstName && <p className="error-msg">{errors.firstName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Surname:</label>
 						<input
@@ -60,6 +75,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
+						{errors.lastName && <p className="error-msg">{errors.lastName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">E-mail:</label>
 						<input
@@ -69,6 +85,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
+						{errors.email && <p className="error-msg">{errors.email}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Password:</label>
 						<input
@@ -78,6 +95,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
+						{errors.password && <p className="error-msg">{errors.password}</p>}
 					<button type="submit" className="my-btn">
 						Register
 					</button>

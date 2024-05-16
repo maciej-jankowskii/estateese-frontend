@@ -9,7 +9,6 @@ class AuthService {
 				email,
 				password,
 			});
-			console.log(response.data);
 			return response.data;
 		} catch (error) {
 			console.log(error);
@@ -27,8 +26,11 @@ class AuthService {
 			);
 			return response.data;
 		} catch (error) {
-			console.log(error);
-			throw error;
+			if (error.response && error.response.data) {
+				throw error.response.data; 
+			} else {
+				throw new Error("Registration failed. Please try again.");
+			}
 		}
 	}
 
