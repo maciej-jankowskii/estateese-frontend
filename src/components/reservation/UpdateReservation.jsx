@@ -10,6 +10,10 @@ function UpdateReservation() {
 		offerId: "",
 	});
 
+    const [errors, setErrors] = useState({
+        offerId: ""
+    })
+
     const navi = useNavigate();
     
 
@@ -36,6 +40,7 @@ function UpdateReservation() {
         setReservationData((prevReservationData) => ({
             ...prevReservationData, [name]:value
         }))
+        setErrors({...errors, [name]: ""});
     }
 
     const handleSubmit = async (e) => {
@@ -45,7 +50,11 @@ function UpdateReservation() {
             const response = await ReservationService.updateReservation(id, reservationData, token)
             navi('/reservations')
         }catch(error){
-            console.log(error);
+            if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
         }
     }
 
@@ -58,6 +67,7 @@ function UpdateReservation() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Update reservation</h2>
+                {errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
 						<div className="first-input-box-post">
@@ -79,6 +89,7 @@ function UpdateReservation() {
 									onChange={handleInputChange}
 								/>
 							</div>
+                            {errors.offerId && <p className="error-msg">{errors.offerId}</p>}
 						</div>
 					</div>
 

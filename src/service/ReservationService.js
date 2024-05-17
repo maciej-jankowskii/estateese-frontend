@@ -43,8 +43,11 @@ class ReservationService{
 			)
 			return response.data;
 		}catch(error){
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Adding the reservation failed. Please try again")
+            }
 		}
 	}
 
@@ -58,8 +61,11 @@ class ReservationService{
 
 			return response;
 		}catch(error){
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Adding the reservation failed. Please try again")
+            }
 		}
 	}
 

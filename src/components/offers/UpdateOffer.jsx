@@ -13,6 +13,12 @@ function UpdateOffer() {
         isAvailable:""
     })
 
+	const [errors, setErrors] = useState({
+		userId: "",
+		clientId: "",
+		propertyId: "",
+	});
+
     const navi = useNavigate();
 
     useEffect(() => {
@@ -39,6 +45,7 @@ function UpdateOffer() {
         setOfferData((prevOfferData) => ({
             ...prevOfferData, [name]:value
         }))
+		setErrors({...errors, [name]: ""});
     }
 
     const handleCheckboxChange = (e) =>{
@@ -55,7 +62,11 @@ function UpdateOffer() {
             const response = await OffersService.updateOffer(id, offerData, token)
             navi('/offers')
         }catch(error){
-            console.log(error);
+            if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
         }
     }
     
@@ -67,6 +78,7 @@ function UpdateOffer() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Update offer</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -79,6 +91,7 @@ function UpdateOffer() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.userId && <p className="error-msg">{errors.userId}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Client:</label>
 						<input
@@ -88,6 +101,7 @@ function UpdateOffer() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.clientId && <p className="error-msg">{errors.clientId}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Property:</label>
 						<input
@@ -97,6 +111,7 @@ function UpdateOffer() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.propertyId && <p className="error-msg">{errors.propertyId}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Reservation:</label>
 						<input

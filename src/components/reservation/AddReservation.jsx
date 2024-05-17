@@ -8,11 +8,18 @@ function AddReservation() {
 		offerId: "",
 	});
 
+	const [errors, setErrors] = useState({
+		offerId: ""
+	})
+
+
+
 	const navi = useNavigate();
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setReservationData({ ...reservationData, [name]: value });
+		setErrors({ ...errors, [name]: "" });
 	};
 
 	const handleSubmit = async (e) => {
@@ -20,10 +27,14 @@ function AddReservation() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			await ReservationService.addReservation(reservationData, token);
-      
+			setErrors({})
 			navi("/reservations");
 		} catch (error) {
-			console.log(error);
+			if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
 		}
 	};
 
@@ -31,6 +42,7 @@ function AddReservation() {
 		<div className="main-content">
 			<div className="main-content-post">
 				<h2>Add reservation</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
 						<div className="first-input-box-post">
@@ -52,6 +64,7 @@ function AddReservation() {
 									onChange={handleInputChange}
 								/>
 							</div>
+							{errors.offerId && <p className="error-msg">{errors.offerId}</p>}
 						</div>
 					</div>
 
