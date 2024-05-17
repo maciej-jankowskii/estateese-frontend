@@ -25,6 +25,18 @@ function UpdateHouse() {
     standard: ""
   })
 
+  const [errors, setErrors] = useState({
+	address: "",
+	price: "",
+	landArea: "",
+	houseArea: "",
+	rooms: "",
+	bathrooms: "",
+	buildingType: "",
+	standard: ""
+
+})
+
   useEffect(() => {
     fetchHouseById(id);
   },[id])
@@ -49,6 +61,7 @@ function UpdateHouse() {
     setHouseData((prevHouseData) => ({
       ...prevHouseData, [name]: value
     }))
+	setErrors({...errors, [name]: ""});
   }
   const handleCheckboxChange = (e) => {
 		const { name, checked } = e.target;
@@ -66,7 +79,11 @@ function UpdateHouse() {
       
       navi('/houses')
     }catch(error){
-      console.log(error.response);
+		if(error instanceof Object){
+			setErrors(error)
+		}else{
+			console.log(error);
+		}
     }
   }
 
@@ -75,6 +92,7 @@ function UpdateHouse() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Update house</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -87,6 +105,7 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.address && <p className="error-msg">{errors.address}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
@@ -96,6 +115,7 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.price && <p className="error-msg">{errors.price}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
@@ -114,6 +134,7 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.landArea && <p className="error-msg">{errors.landArea}</p>}
 
           <div className="input-box-post">
 						<label htmlFor="">House area:</label>
@@ -124,6 +145,7 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.houseArea && <p className="error-msg">{errors.houseArea}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Rooms:</label>
@@ -134,6 +156,7 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.rooms && <p className="error-msg">{errors.rooms}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Bathrooms:</label>
@@ -144,7 +167,9 @@ function UpdateHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.bathrooms && <p className="error-msg">{errors.bathrooms}</p>}
                     </div>
+
                     <div className="second-input-box-post">
 
             <div className="input-box-post">
@@ -174,6 +199,7 @@ function UpdateHouse() {
 							))}
 						</select>
 					</div>
+					{errors.buildingType && <p className="error-msg">{errors.buildingType}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Standard:</label>
@@ -191,6 +217,7 @@ function UpdateHouse() {
 							))}
 						</select>
 					</div>
+					{errors.standard && <p className="error-msg">{errors.standard}</p>}
 
 					<div className="input-checkbox-group">
 					<div className="input-box-post">

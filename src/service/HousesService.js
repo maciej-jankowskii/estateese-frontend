@@ -39,8 +39,11 @@ class HousesService {
 			);
 			return response.data;
 		} catch (error) {
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Adding the house failed. Please try again")
+            }
 		}
 	}
 
@@ -56,8 +59,11 @@ class HousesService {
 
 			return response;
 		} catch (error) {
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Adding the house failed. Please try again")
+            }
 		}
 	}
 

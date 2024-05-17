@@ -23,12 +23,25 @@ function AddHouse() {
     standard: ""
   })
 
+  const [errors, setErrors] = useState({
+	address: "",
+	price: "",
+	landArea: "",
+	houseArea: "",
+	rooms: "",
+	bathrooms: "",
+	buildingType: "",
+	standard: ""
+
+})
+
   const navi = useNavigate();
 
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
     setHouseData({...houseData, [name]: value});
+	setErrors({...errors, [name]: ""})
   }
 
   const handleCheckboxChange = (e) => {
@@ -44,16 +57,14 @@ function AddHouse() {
       await HousesService.addHouse(houseData, token)
       navi('/houses')
     }catch(error){
-      console.log(error);
+		if(error instanceof Object){
+			setErrors(error)
+		}else{
+			console.log(error);
+		}
 
     }
   }
-
-
-
-    
-
-
 
 
 
@@ -61,6 +72,7 @@ function AddHouse() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Add house</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -73,6 +85,7 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.address && <p className="error-msg">{errors.address}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
@@ -82,6 +95,8 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.price && <p className="error-msg">{errors.price}</p>}
+
 					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
@@ -100,6 +115,7 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.landArea && <p className="error-msg">{errors.landArea}</p>}
 
           <div className="input-box-post">
 						<label htmlFor="">House area:</label>
@@ -110,6 +126,7 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.houseArea && <p className="error-msg">{errors.houseArea}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Rooms:</label>
@@ -120,6 +137,7 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.rooms && <p className="error-msg">{errors.rooms}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Bathrooms:</label>
@@ -130,6 +148,7 @@ function AddHouse() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.bathrooms && <p className="error-msg">{errors.bathrooms}</p>}
                     </div>
                     <div className="second-input-box-post">
 
@@ -160,6 +179,7 @@ function AddHouse() {
 							))}
 						</select>
 					</div>
+					{errors.buildingType && <p className="error-msg">{errors.buildingType}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Standard:</label>
@@ -177,6 +197,7 @@ function AddHouse() {
 							))}
 						</select>
 					</div>
+					{errors.standard && <p className="error-msg">{errors.standard}</p>}
 
 					<div className="input-checkbox-group">
 					<div className="input-box-post">
