@@ -26,6 +26,18 @@ function UpdateApartment() {
 		standard: "",
 	});
 
+	const [errors, setErrors] = useState({
+		address: "",
+		price: "",
+		area: "",
+		rooms: "",
+		bathrooms: "",
+		buildingType: "",
+		standard: ""
+	});
+
+	
+
 	useEffect(() => {
 		fetchApartmentById(id);
 	}, [id]);
@@ -78,6 +90,7 @@ function UpdateApartment() {
 			...prevApartmentData,
 			[name]: value,
 		}));
+		setErrors({...errors, [name]: ""});
 	};
 	const handleCheckboxChange = (e) => {
 		const { name, checked } = e.target;
@@ -85,6 +98,7 @@ function UpdateApartment() {
 			...prevApartmentData,
 			[name]: checked,
 		}));
+		setErrors({...errors, [name]: ""});
 	};
 
 	const handleSubmit = async (e) => {
@@ -99,7 +113,11 @@ function UpdateApartment() {
 			console.log(response);
 			navi("/apartments");
 		} catch (error) {
-			console.log(error);
+			if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
 		}
 	};
 
@@ -107,6 +125,7 @@ function UpdateApartment() {
 		<div className="main-content">
 			<div className="main-content-post">
 				<h2>Update apartment</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -119,6 +138,8 @@ function UpdateApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.address && <p className="error-msg">{errors.address}</p>}
+					
 					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
@@ -128,6 +149,7 @@ function UpdateApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.price && <p className="error-msg">{errors.price}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
@@ -146,6 +168,7 @@ function UpdateApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.area && <p className="error-msg">{errors.area}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Rooms:</label>
@@ -156,6 +179,7 @@ function UpdateApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.rooms && <p className="error-msg">{errors.rooms}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Bathrooms:</label>
@@ -166,6 +190,7 @@ function UpdateApartment() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.bathrooms && <p className="error-msg">{errors.bathrooms}</p>}
                     </div>
                     <div className="second-input-box-post">
 
@@ -206,6 +231,7 @@ function UpdateApartment() {
 							))}
 						</select>
 					</div>
+					{errors.buildingType && <p className="error-msg">{errors.buildingType}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Standard:</label>
@@ -223,6 +249,7 @@ function UpdateApartment() {
 							))}
 						</select>
 					</div>
+					{errors.standard && <p className="error-msg">{errors.standard}</p>}
 
 					<div className="input-checkbox-group">
 					<div className="input-box-post">
