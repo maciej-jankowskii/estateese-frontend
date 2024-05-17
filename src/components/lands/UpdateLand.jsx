@@ -10,12 +10,19 @@ function UpdateLand() {
 
   const [landData, setLandData] = useState({
     address: "",
-		price: "",
-		description: "",
+	price: "",
+	description: "",
     typeOfLand: "",
     area: "",
     buildingPermit: ""
   })
+
+  const [errors, setErrors] = useState({
+	address: "",
+	price: "",
+	area: "",
+	typeOfLand: "",
+});
 
   useEffect(() => {
     fetchLandById(id);
@@ -42,6 +49,7 @@ function UpdateLand() {
     setLandData((prevLandData) => ({
       ...prevLandData, [name]: value
     }))
+	setErrors({...errors, [name]: ""});
   }
   const handleCheckboxChange = (e) => {
 		const { name, checked } = e.target;
@@ -59,7 +67,11 @@ function UpdateLand() {
       
       navi('/lands')
     }catch(error){
-      console.log(error.response);
+		if(error instanceof Object){
+			setErrors(error)
+		}else{
+			console.log(error);
+		}
     }
   }
 
@@ -70,6 +82,7 @@ function UpdateLand() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Update land</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -82,6 +95,7 @@ function UpdateLand() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.address && <p className="error-msg">{errors.address}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
@@ -91,6 +105,7 @@ function UpdateLand() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.price && <p className="error-msg">{errors.price}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
@@ -109,6 +124,7 @@ function UpdateLand() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.area && <p className="error-msg">{errors.area}</p>}
 
                     </div>
                     <div className="second-input-box-post">
@@ -132,6 +148,7 @@ function UpdateLand() {
 							))}
 						</select>
 					</div>
+					{errors.typeOfLand && <p className="error-msg">{errors.typeOfLand}</p>}
 
 					<div className="input-checkbox-group">
 					<div className="input-box-post">
