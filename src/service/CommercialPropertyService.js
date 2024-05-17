@@ -42,8 +42,11 @@ class CommercialPropertyService {
 			)
 			return response.data;
 		}catch(error){
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Adding the commercial property failed. Please try again")
+            }
 		}
 	}
 
@@ -57,8 +60,11 @@ class CommercialPropertyService {
 
 			return response;
 		}catch(error){
-			console.log(error);
-			throw error;
+			if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Updating the commercial property failed. Please try again")
+            }
 		}
 	}
 

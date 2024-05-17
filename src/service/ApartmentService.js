@@ -57,7 +57,7 @@ class ApartmentService{
             if(error.response && error.response.data){
                 throw error.response.data
             }else{
-                throw new Error("Adding the apartment failed. Please try again")
+                throw new Error("Updating the apartment failed. Please try again")
             }
         }
     }

@@ -19,11 +19,23 @@ function AddCommercial() {
         typeOfBusiness: ''
     })
 
+	const [errors, setErrors] = useState({
+		address: "",
+		price: "",
+		area: "",
+		rooms: "",
+		bathrooms: "",
+		buildingType: "",
+		typeOfBusiness: ""
+
+	})
+
     const navi = useNavigate();
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setCommercialData({...commercialData, [name]: value})
+		setErrors({...errors, [name]: ""})
     }
 
     const handleSubmit =  async (e) => {
@@ -32,11 +44,15 @@ function AddCommercial() {
         try{
             const token = localStorage.getItem('accessToken')
             await CommercialPropertyService.addCommercialProperty(commercialData, token);
-
+			setErrors({})
             navi('/commercials')
 
         }catch(error){
-            console.log(error);
+            if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
         }
 
     }
@@ -51,6 +67,7 @@ function AddCommercial() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Add commercial property</h2>
+				{errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					<div className="apartment-post-box">
                     <div className='first-input-box-post'>
@@ -63,6 +80,7 @@ function AddCommercial() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.address && <p className="error-msg">{errors.address}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Price:</label>
 						<input
@@ -72,6 +90,7 @@ function AddCommercial() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.price && <p className="error-msg">{errors.price}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Description:</label>
 						<input
@@ -90,6 +109,7 @@ function AddCommercial() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.area && <p className="error-msg">{errors.area}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Rooms:</label>
@@ -100,6 +120,7 @@ function AddCommercial() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.rooms && <p className="error-msg">{errors.rooms}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Bathrooms:</label>
@@ -110,6 +131,7 @@ function AddCommercial() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.bathrooms && <p className="error-msg">{errors.bathrooms}</p>}
                     </div>
                     <div className="second-input-box-post">
 
@@ -140,6 +162,7 @@ function AddCommercial() {
 							))}
 						</select>
 					</div>
+					{errors.buildingType && <p className="error-msg">{errors.buildingType}</p>}
 
 					<div className="input-box-post">
 						<label htmlFor="">Type of Business:</label>
@@ -157,6 +180,7 @@ function AddCommercial() {
 							))}
 						</select>
 					</div>
+					{errors.typeOfBusiness && <p className="error-msg">{errors.typeOfBusiness}</p>}
 
 				
                     </div>

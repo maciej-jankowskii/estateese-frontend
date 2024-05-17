@@ -110,7 +110,6 @@ function UpdateApartment() {
 				apartmentData,
 				token
 			);
-			console.log(response);
 			navi("/apartments");
 		} catch (error) {
 			if(error instanceof Object){
