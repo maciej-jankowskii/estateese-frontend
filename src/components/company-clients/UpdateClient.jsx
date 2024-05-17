@@ -14,6 +14,12 @@ function UpdateClient() {
 
     })
 
+    const [errors, setErrors] = useState({
+		firstName: "",
+		lastName: ""
+
+	})
+
     useEffect(()=>{
         fetchClientById(id)
     },[id])
@@ -38,6 +44,7 @@ function UpdateClient() {
         setClientData((prevClientData) => ({
             ...prevClientData, [name]:value,
         }))
+        setErrors({...errors, [name]: ""});
     }
 
     const handleSubmit = async (e) => {
@@ -50,7 +57,11 @@ function UpdateClient() {
             );
             navi('/clients')
         }catch(error){
-            console.log(error);
+            if(error instanceof Object){
+				setErrors(error)
+			}else{
+				console.log(error);
+			}
         }
     }
 
@@ -64,6 +75,7 @@ function UpdateClient() {
     <div className="main-content">
 			<div className="main-content-post">
 				<h2>Update client</h2>
+                {errors.general && <p className="error-msg">{errors.general}</p>}
 				<form onSubmit={handleSubmit} className="post-form">
 					
                   
@@ -76,6 +88,7 @@ function UpdateClient() {
 							onChange={handleInputChange}
 						/>
 					</div>
+                    {errors.firstName && <p className="error-msg">{errors.firstName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Last name:</label>
 						<input
@@ -85,6 +98,7 @@ function UpdateClient() {
 							onChange={handleInputChange}
 						/>
 					</div>
+                    {errors.lastName && <p className="error-msg">{errors.lastName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Telephone:</label>
 						<input
