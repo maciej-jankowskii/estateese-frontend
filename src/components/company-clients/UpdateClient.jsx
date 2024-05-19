@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ClientService from "../../service/ClientService";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function UpdateClient() {
     const {id} = useParams();
@@ -55,6 +56,7 @@ function UpdateClient() {
             const reponse = await ClientService.updateClient(
                 id, clientData, token
             );
+            showNotification("Client upadted successfully", "success")
             navi('/clients')
         }catch(error){
             if(error instanceof Object){

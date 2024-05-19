@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import OffersService from "../../service/OffersService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
+import Notification,{showNotification} from "../../alerts/Notification";
 
 function Offers() {
 	const [offers, setOffers] = useState([]);
@@ -38,6 +39,7 @@ function Offers() {
 		try{
 			const token = localStorage.getItem("accessToken")
 			await OffersService.deleteOffer(id, token);
+			showNotification("Offer deleted","success")
 			fetchOffers();
 		}catch(error){
 			console.log(error);

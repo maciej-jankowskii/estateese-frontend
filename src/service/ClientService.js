@@ -86,8 +86,12 @@ class ClientService{
             )
             return response;
         }catch(error){
-            console.log(error);
-            throw error;
+            if (error.response && error.response.status === 403) {
+                throw new Error(error.response.data);
+              } else {
+                throw error;
+              }
+            
         }
     }
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ClientService from "../../service/ClientService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
+import Notification, {showNotification} from "../../alerts/Notification";
 
 function Clients() {
 	const [clients, setClients] = useState([]);
@@ -30,7 +31,7 @@ function Clients() {
 			await ClientService.deleteClient(id, token);
 			fetchClients();
 		}catch(error){
-			console.log(error);
+			showNotification("Cannot delete client who has offers", "error")
 		}
 
 	}

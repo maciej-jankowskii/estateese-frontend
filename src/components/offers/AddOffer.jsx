@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OffersService from "../../service/OffersService";
+import Notification,{showNotification} from "../../alerts/Notification";
 
 function AddOffer() {
 	const [offerData, setOfferData] = useState({
@@ -36,6 +37,7 @@ function AddOffer() {
 			const token = localStorage.getItem("accessToken");
 			await OffersService.addOffer(offerData, token);
 			setErrors({});
+			showNotification("Offer added successfully", "success")
 			navi("/offers");
 		} catch (error) {
 			if(error instanceof Object){

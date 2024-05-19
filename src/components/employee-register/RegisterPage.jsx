@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../service/AuthService";
+import Notification,{showNotification} from "../../alerts/Notification";
 
 function RegisterPage() {
 	const [userData, setUserData] = useState({
@@ -38,6 +39,7 @@ function RegisterPage() {
 				email: "",
 				password: "",
 			});
+			showNotification("Employee register successfully", "success")
 			setErrors({})
 		
 			navi("/home");

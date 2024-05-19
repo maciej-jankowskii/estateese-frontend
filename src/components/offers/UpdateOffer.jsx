@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import OffersService from "../../service/OffersService";
+import Notification, {showNotification} from "../../alerts/Notification";
 
 function UpdateOffer() {
 	const { id } = useParams();
@@ -72,6 +73,7 @@ function UpdateOffer() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			const response = await OffersService.updateOffer(id, offerData, token);
+			showNotification("Offer updated successfully", "success")
 			navi("/offers");
 		} catch (error) {
 			if (error instanceof Object) {

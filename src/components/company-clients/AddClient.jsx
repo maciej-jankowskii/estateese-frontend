@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ClientService from "../../service/ClientService";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function AddClient() {
     const [clientData, setClientData] = useState({
@@ -31,6 +32,7 @@ function AddClient() {
         try{
             const token = localStorage.getItem('accessToken');
             await ClientService.addClient(clientData, token);
+			showNotification("Client added successfully", "success")
 			setErrors({})
             navi('/clients')
         }catch(error){
