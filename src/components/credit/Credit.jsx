@@ -11,6 +11,13 @@ function Credit() {
         downPayment: "",
         loanAmount: ""
     })
+	const[errors, setErrors] = useState({
+		monthlyIncome: "",
+        monthlyExpenses: "",
+        interestRate: "",
+        loanTerm: "",
+        downPayment: ""
+	})
 	
 
     const [loanAmount, setLoadAmount] = useState(null);
@@ -18,26 +25,48 @@ function Credit() {
     const handleInputChange = (e) => {
         const {name, value} = e.target;
         setCreditData({...creditData, [name]: value})
+		setErrors({ ...errors, [name]: "" });
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            const token = localStorage.getItem('accessToken');
-            const response = await CreditService.calculateLoanEligibility(creditData, token);
-            setLoadAmount(response);
-
-            setCreditData({
-                monthlyIncome: '',
-                monthlyExpenses: '',
-                interestRate: '',
-                loanTerm: '',
-                downPayment: ''
-            });
-        }catch(error){
-            console.log(error);
-        }
-    }
+		e.preventDefault();
+		let hasErrors = false;
+	
+		
+		for (const key in creditData) {
+			if (!creditData[key]) {
+				setErrors(prevErrors => ({
+					...prevErrors,
+					[key]: "Field cannot be empty"
+				}));
+				hasErrors = true;
+			}
+		}
+	
+		if (hasErrors) {
+			return;
+		}
+	
+		try {
+			const token = localStorage.getItem('accessToken');
+			const response = await CreditService.calculateLoanEligibility(creditData, token);
+			setLoadAmount(response);
+	
+			setCreditData({
+				monthlyIncome: '',
+				monthlyExpenses: '',
+				interestRate: '',
+				loanTerm: '',
+				downPayment: ''
+			});
+		} catch (error) {
+			if (error instanceof Object) {
+				setErrors(error);
+			} else {
+				console.log(error);
+			}
+		}
+	}
 
 
 
@@ -55,6 +84,7 @@ function Credit() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.monthlyIncome && <p className="error-msg">{errors.monthlyIncome}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Monthly Expenses:</label>
 						<input
@@ -64,6 +94,7 @@ function Credit() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.monthlyExpenses && <p className="error-msg">{errors.monthlyExpenses}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Interest Rate:</label>
 						<input
@@ -73,6 +104,7 @@ function Credit() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.interestRate && <p className="error-msg">{errors.interestRate}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Loan Term:</label>
 						<input
@@ -82,6 +114,7 @@ function Credit() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.loanTerm && <p className="error-msg">{errors.loanTerm}</p>}
 
                     <div className="input-box-post">
 						<label htmlFor="">Down Payment:</label>
@@ -92,6 +125,7 @@ function Credit() {
 							onChange={handleInputChange}
 						/>
 					</div>
+					{errors.downPayment && <p className="error-msg">{errors.downPayment}</p>}
 
 
 					<button type="submit" className="my-btn">

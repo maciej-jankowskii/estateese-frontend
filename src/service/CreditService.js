@@ -13,7 +13,11 @@ class CreditService {
             )
             return response.data;
         } catch(error){
-            console.log(error);
+            if(error.response && error.response.data){
+                throw error.response.data
+            }else{
+                throw new Error("Please try again")
+            }
         }
     }
 }
