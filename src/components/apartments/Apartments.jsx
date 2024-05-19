@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import ApartmentService from "../../service/ApartmentService";
 import { Link } from "react-router-dom";
 import "../../style/TablesStyle.css";
+import Notification, {showNotification} from "../../alerts/Notification";
 
 function Apartments() {
 	const [apartments, setApartments] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
+	
+	
 
 	useEffect(() => {
 		fetchApartments();
@@ -32,9 +35,10 @@ function Apartments() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			await ApartmentService.deleteApartment(id, token);
+			showNotification("Deleted successfully", "success");
 			fetchApartments();
 		} catch (error) {
-			console.log(error);
+			showNotification(error.message, "error");
 		}
 	};
 

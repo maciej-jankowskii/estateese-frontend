@@ -11,6 +11,7 @@ function Credit() {
         downPayment: "",
         loanAmount: ""
     })
+	
 
     const [loanAmount, setLoadAmount] = useState(null);
 

@@ -105,6 +105,12 @@
 	border-radius: 10px;
 	padding: 10px 20px;
 	cursor: pointer;
+	transition: 0.3s;
+}
+
+.login-btn:hover{
+	background-color: black;
+	color: white;
 }
 
 /* HOME PAGE STYLE  */
@@ -171,10 +177,21 @@
 .nav-item-logo {
 	text-decoration: none;
 	color: white;
+	
 }
+
+
+
+
+
 .nav-item {
 	text-decoration: none;
 	color: white;
+	transition: 0.3s;
+}
+
+.nav-item:hover{
+	color: grey;
 }
 
 .nav-item-border {

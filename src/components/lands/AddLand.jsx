@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TypeOfLand from "../../const/TypeOfLand";
 import LandsService from "../../service/LandsService";
 import "../../style/PostStyle.css";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function AddLand() {
 	const [landData, setLandData] = useState({
@@ -40,6 +41,7 @@ function AddLand() {
 			const token = localStorage.getItem("accessToken");
 			await LandsService.addLand(landData, token);
 			setErrors({});
+			showNotification("Land added successfully", "success");
 			navi("/lands");
 		} catch (error) {
 			if(error instanceof Object){

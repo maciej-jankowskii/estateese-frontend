@@ -4,6 +4,7 @@ import ApartmentService from "../../service/ApartmentService";
 import Standard from "../../const/Standard";
 import BuildingType from "../../const/BuildingType";
 import '../../style/PostStyle.css'
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function UpdateApartment() {
 	const { id } = useParams();
@@ -110,6 +111,7 @@ function UpdateApartment() {
 				apartmentData,
 				token
 			);
+			showNotification("Apartment updated successfully", "success");
 			navi("/apartments");
 		} catch (error) {
 			if(error instanceof Object){

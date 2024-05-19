@@ -7,7 +7,6 @@ function AddOffer() {
 		userId: "",
 		clientId: "",
 		propertyId: "",
-		reservationId: "",
 		isBooked: "",
 		isAvailable: "",
 	});
@@ -86,15 +85,7 @@ function AddOffer() {
 								/>
 							</div>
 							{errors.propertyId && <p className="error-msg">{errors.propertyId}</p>}
-							<div className="input-box-post">
-								<label htmlFor="">Reservation:</label>
-								<input
-									type="number"
-									name="reservationId"
-									value={offerData.reservationId}
-									onChange={handleInputChange}
-								/>
-							</div>
+							
 						</div>
 						<div className="second-input-box-post">
 							<div className="input-checkbox-group">
@@ -117,6 +108,7 @@ function AddOffer() {
 										name="isAvailable"
 										checked={offerData.isAvailable}
 										onChange={handleCheckboxChange}
+										disabled
 									/>
 								</div>
 							</div>

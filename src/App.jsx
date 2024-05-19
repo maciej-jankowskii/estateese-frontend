@@ -28,14 +28,13 @@ import LandDetails from "./components/lands/LandDetails";
 import UpdateLand from "./components/lands/UpdateLand";
 import AddOffer from "./components/offers/AddOffer";
 import UpdateOffer from "./components/offers/UpdateOffer";
-import Reservations from "./components/reservation/Reservations";
-import AddReservation from './components/reservation/AddReservation'
-import UpdateReservation from "./components/reservation/UpdateReservation";
 import Credit from "./components/credit/Credit";
+import Notification from "./alerts/Notification";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<Notification></Notification>
 			<Navbar></Navbar>
 
 			<Routes>
@@ -77,9 +76,6 @@ function App() {
 				<Route path="/offers" element={<Offers></Offers>}></Route>
 				<Route path="/add-offer" element={<AddOffer></AddOffer>}></Route>
 				<Route path="/update-offer/:id" element={<UpdateOffer></UpdateOffer>}></Route>
-				<Route path="/reservations" element={<Reservations></Reservations>}></Route>
-				<Route path="/add-reservation" element={<AddReservation></AddReservation>}></Route>
-				<Route path="/update-reservation/:id" element={<UpdateReservation></UpdateReservation>}></Route>
 				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
 				<Route path="/clients" element={<Clients></Clients>}></Route>
 				<Route path="/add-client" element={<AddClient></AddClient>}></Route>

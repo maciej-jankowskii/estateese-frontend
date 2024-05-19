@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CommercialPropertyService from "../../service/CommercialPropertyService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
+import Notification, {showNotification} from "../../alerts/Notification";
 
 function Commercials() {
 	const [commercials, setCommercials] = useState([]);
@@ -26,9 +27,10 @@ function Commercials() {
 		try{
 			const token = localStorage.getItem('accessToken');
 			await CommercialPropertyService.deleteCommercialProperty(id, token);
+			showNotification("Deleted successfully", "success");
 			fetchCommercials();
 		}catch(error){
-			console.log(error);
+			showNotification(error.message, "error");
 		}
 	}
 

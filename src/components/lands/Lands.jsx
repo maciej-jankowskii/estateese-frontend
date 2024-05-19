@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import LandsService from "../../service/LandsService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
+import Notification, { showNotification } from "../../alerts/Notification";
+
 function Lands() {
 	const [lands, setLands] = useState([]);
 	const [page, setPage] = useState(0);
@@ -36,9 +38,10 @@ function Lands() {
 		try{
 			const token = localStorage.getItem("accessToken")
 			await LandsService.deleteLand(id, token);
+			showNotification("Land deleted", "success");
 			fetchLands();
 		}catch(error){
-			console.log(error);
+			showNotification("Cannot delete house assigned to an offer", "error");
 		}
 	}
 	return (

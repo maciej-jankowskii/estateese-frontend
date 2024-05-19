@@ -4,6 +4,7 @@ import HousesService from '../../service/HousesService';
 import Standard from "../../const/Standard";
 import BuildingType from "../../const/BuildingType";
 import '../../style/PostStyle.css'
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function UpdateHouse() {
   const {id} = useParams();
@@ -76,7 +77,7 @@ function UpdateHouse() {
     try{
       const token = localStorage.getItem('accessToken');
       const response = await HousesService.updateHouse(id, houseData, token)
-      
+      showNotification("House updated successfully", "success");
       navi('/houses')
     }catch(error){
 		if(error instanceof Object){

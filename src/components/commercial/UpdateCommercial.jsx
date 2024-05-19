@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import CommercialPropertyService from '../../service/CommercialPropertyService';
 import BuildingType from '../../const/BuildingType'
 import TypeOfBusiness from '../../const/TypeOfBusiness';
+import Notification,{showNotification} from '../../alerts/Notification';
 
 function UpdateCommercial() {
     const {id} = useParams();
@@ -76,6 +77,7 @@ function UpdateCommercial() {
         try{
             const token = localStorage.getItem('accessToken');
             const response = await CommercialPropertyService.updateCommercialProperty(id, commercialData, token);
+			showNotification("Commercial property updated successfully", "success");
             navi('/commercials')
         } catch(error){
             if(error instanceof Object){

@@ -2,12 +2,15 @@ import { useState } from "react";
 import "../../style/CommonStyle.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../service/AuthService";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const navi = useNavigate();
+	
+	
 
 	const handleSubmitLogin = async (e) => {
 		e.preventDefault();
@@ -17,6 +20,7 @@ function LoginPage() {
 			console.log(userData);
 			if (userData.accessToken) {
 				localStorage.setItem("accessToken", userData.accessToken);
+				showNotification("Successfully logged in", 'success')
 				navi("/home");
 			} else {
 				setError(userData.errorMessage);
@@ -40,7 +44,6 @@ function LoginPage() {
 				<div className="second-box">
 					<div className="form-box">
 						<h2>Login</h2>
-						{error && <p className="error-msg">{error}</p>}
 						<form onSubmit={handleSubmitLogin}>
 							<div className="input-box">
 								<label>E-mail:</label>
@@ -60,6 +63,7 @@ function LoginPage() {
 									onChange={(e) => setPassword(e.target.value)}
 								/>
 							</div>
+							{error && <p className="error-msg">{error}</p>}
 							<button type="submit" className="login-btn">
 								Login
 							</button>

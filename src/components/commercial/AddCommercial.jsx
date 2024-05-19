@@ -4,6 +4,7 @@ import TypeOfBusiness from '../../const/TypeOfBusiness';
 import { useNavigate } from 'react-router-dom'
 import '../../style/PostStyle.css';
 import CommercialPropertyService from '../../service/CommercialPropertyService';
+import Notification, {showNotification} from "../../alerts/Notification";
 
 function AddCommercial() {
 
@@ -45,6 +46,7 @@ function AddCommercial() {
             const token = localStorage.getItem('accessToken')
             await CommercialPropertyService.addCommercialProperty(commercialData, token);
 			setErrors({})
+			showNotification("Commercial property added successfully", "success");
             navi('/commercials')
 
         }catch(error){

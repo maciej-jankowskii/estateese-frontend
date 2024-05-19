@@ -4,6 +4,7 @@ import Standard from "../../const/Standard";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import HousesService from "../../service/HousesService";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function AddHouse() {
 	const [houseData, setHouseData] = useState({
@@ -52,6 +53,7 @@ function AddHouse() {
 			const token = localStorage.getItem("accessToken");
 			await HousesService.addHouse(houseData, token);
 			setErrors({});
+			showNotification("House added successfully", "success");
 			navi("/houses");
 		} catch (error) {
 			if (error instanceof Object) {

@@ -67,7 +67,6 @@ function Offers() {
 								<th>Employee</th>
 								<th>Client</th>
 								<th>Property</th>
-								<th>Reservation</th>
 								<th>Booked</th>
 								<th>Available</th>
 								<th>Action</th>
@@ -80,7 +79,6 @@ function Offers() {
 									<td>{offer.userId}</td>
 									<td>{offer.clientId}</td>
 									<td>{offer.propertyId}</td>
-									<td>{offer.reservationId}</td>
 									<td>{offer.isBooked ? "Yes" : "No"}</td>
 									<td>{offer.isAvailable ? "Yes" : "No"}</td>
 									<td>

@@ -4,6 +4,7 @@ import ApartmentService from "../../service/ApartmentService";
 import Standard from "../../const/Standard";
 import BuildingType from "../../const/BuildingType";
 import '../../style/PostStyle.css'
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function AddApartment() {
 	const [apartmentData, setApartmentData] = useState({
@@ -54,6 +55,7 @@ function AddApartment() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			await ApartmentService.addApartment(apartmentData, token);
+			showNotification("Apartment added successfully", "success");
 			setErrors({})
 			navi("/apartments");
 		} catch (error) {

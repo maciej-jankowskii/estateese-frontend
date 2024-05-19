@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import LandsService from '../../service/LandsService'
 import TypeOfLand from '../../const/TypeOfLand'
 import '../../style/PostStyle.css'
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function UpdateLand() {
   const {id} = useParams();
@@ -64,7 +65,7 @@ function UpdateLand() {
     try{
       const token = localStorage.getItem('accessToken');
       const response = await LandsService.updateLand(id, landData, token)
-      
+      showNotification("House upadted successfully", "success");
       navi('/lands')
     }catch(error){
 		if(error instanceof Object){

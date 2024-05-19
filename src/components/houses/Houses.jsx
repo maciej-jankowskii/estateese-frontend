@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import HousesService from "../../service/HousesService";
 import '../../style/TablesStyle.css'
 import { Link } from "react-router-dom";
+import Notification, { showNotification } from "../../alerts/Notification";
 
 function Houses() {
 	const [houses, setHouses] = useState([]);
@@ -38,9 +39,10 @@ function Houses() {
 		try{
 			const token = localStorage.getItem("accessToken")
 			await HousesService.deleteHouse(id, token);
+			showNotification("House deleted", "success");
 			fetchHouses();
 		}catch(error){
-			console.log(error);
+			showNotification("Cannot delete house assigned to an offer", "error");
 		}
 	}
 
