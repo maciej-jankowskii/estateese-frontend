@@ -28,7 +28,9 @@ class AuthService {
 		} catch (error) {
 			if (error.response && error.response.data) {
 				throw error.response.data; 
-			} else {
+			} else if(error.response && error.response.status === 400){
+				throw new Error(error.response.data)
+			}else {
 				throw new Error("Registration failed. Please try again.");
 			}
 		}

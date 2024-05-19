@@ -46,6 +46,9 @@ function RegisterPage() {
 		} catch (error) {
 			if(error instanceof Object){
 				setErrors(error)
+			}else if(error){
+				showNotification("Email is taken", "error")
+				
 			}else{
 				console.log(error);
 			}
