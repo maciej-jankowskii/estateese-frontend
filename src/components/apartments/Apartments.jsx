@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import ApartmentService from "../../service/ApartmentService";
 import { Link } from "react-router-dom";
 import "../../style/TablesStyle.css";
-import Notification, {showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Apartments() {
 	const [apartments, setApartments] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
-	
-	
 
 	useEffect(() => {
 		fetchApartments();
@@ -28,8 +26,6 @@ function Apartments() {
 			console.log("Error: " + error);
 		}
 	};
-
-
 
 	const deleteApartment = async (id) => {
 		try {

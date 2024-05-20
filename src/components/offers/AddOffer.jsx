@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OffersService from "../../service/OffersService";
-import Notification,{showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function AddOffer() {
 	const [offerData, setOfferData] = useState({
@@ -37,12 +37,12 @@ function AddOffer() {
 			const token = localStorage.getItem("accessToken");
 			await OffersService.addOffer(offerData, token);
 			setErrors({});
-			showNotification("Offer added successfully", "success")
+			showNotification("Offer added successfully", "success");
 			navi("/offers");
 		} catch (error) {
-			if(error instanceof Object){
-				setErrors(error)
-			}else{
+			if (error instanceof Object) {
+				setErrors(error);
+			} else {
 				console.log(error);
 			}
 		}
@@ -66,7 +66,7 @@ function AddOffer() {
 								/>
 							</div>
 							{errors.userId && <p className="error-msg">{errors.userId}</p>}
-							
+
 							<div className="input-box-post">
 								<label htmlFor="">Client:</label>
 								<input
@@ -76,7 +76,9 @@ function AddOffer() {
 									onChange={handleInputChange}
 								/>
 							</div>
-							{errors.clientId && <p className="error-msg">{errors.clientId}</p>}
+							{errors.clientId && (
+								<p className="error-msg">{errors.clientId}</p>
+							)}
 							<div className="input-box-post">
 								<label htmlFor="">Property:</label>
 								<input
@@ -86,8 +88,9 @@ function AddOffer() {
 									onChange={handleInputChange}
 								/>
 							</div>
-							{errors.propertyId && <p className="error-msg">{errors.propertyId}</p>}
-							
+							{errors.propertyId && (
+								<p className="error-msg">{errors.propertyId}</p>
+							)}
 						</div>
 						<div className="second-input-box-post">
 							<div className="input-checkbox-group">

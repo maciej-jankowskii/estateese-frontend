@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import ClientService from "../../service/ClientService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, {showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Clients() {
 	const [clients, setClients] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
-
 
 	useEffect(() => {
 		fetchClients();
@@ -18,23 +17,22 @@ function Clients() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			const response = await ClientService.getAllClients(token, page, pageSize);
-			
+
 			setClients(response.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
-	const deleteClient = async(id) =>{
-		try{
-			const token = localStorage.getItem('accessToken');
+	const deleteClient = async (id) => {
+		try {
+			const token = localStorage.getItem("accessToken");
 			await ClientService.deleteClient(id, token);
 			fetchClients();
-		}catch(error){
-			showNotification("Cannot delete client who has offers", "error")
+		} catch (error) {
+			showNotification("Cannot delete client who has offers", "error");
 		}
-
-	}
+	};
 
 	const nextPage = () => {
 		setPage(page + 1);
@@ -86,8 +84,11 @@ function Clients() {
 											Update
 										</Link>
 
-										<Link className="action-btns" onClick={() => deleteClient(client.id)}>
-										Delete
+										<Link
+											className="action-btns"
+											onClick={() => deleteClient(client.id)}
+										>
+											Delete
 										</Link>
 									</td>
 								</tr>

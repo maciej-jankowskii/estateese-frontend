@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import LandsService from "../../service/LandsService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Lands() {
 	const [lands, setLands] = useState([]);
@@ -23,7 +23,6 @@ function Lands() {
 		}
 	};
 
-
 	const nextPage = () => {
 		setPage(page + 1);
 	};
@@ -35,15 +34,15 @@ function Lands() {
 	};
 
 	const deleteLand = async (id) => {
-		try{
-			const token = localStorage.getItem("accessToken")
+		try {
+			const token = localStorage.getItem("accessToken");
 			await LandsService.deleteLand(id, token);
 			showNotification("Land deleted", "success");
 			fetchLands();
-		}catch(error){
+		} catch (error) {
 			showNotification("Cannot delete house assigned to an offer", "error");
 		}
-	}
+	};
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
@@ -67,10 +66,21 @@ function Lands() {
 									<td>{land.address}</td>
 									<td>{land.price} EUR</td>
 									<td>
-										<Link className="action-btns"
-										to={`/land/${land.id}`}>Details</Link>
-										<Link className="action-btns" to={`/update-land/${land.id}`}>Update</Link>
-										<Link className="action-btns" onClick={() => deleteLand(land.id)}>Delete</Link>
+										<Link className="action-btns" to={`/land/${land.id}`}>
+											Details
+										</Link>
+										<Link
+											className="action-btns"
+											to={`/update-land/${land.id}`}
+										>
+											Update
+										</Link>
+										<Link
+											className="action-btns"
+											onClick={() => deleteLand(land.id)}
+										>
+											Delete
+										</Link>
 									</td>
 								</tr>
 							))}

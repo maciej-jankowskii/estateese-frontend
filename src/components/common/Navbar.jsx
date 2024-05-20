@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import AuthService from "../../service/AuthService";
 import "../../style/CommonStyle.css";
 import { useState } from "react";
-import Notification, { showNotification } from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Navbar() {
 	const [showSubMenu, setShowSubMenu] = useState(false);
 
 	const handleLogout = () => {
-		showNotification("Log out successfully", "success")
+		showNotification("Log out successfully", "success");
 		AuthService.logout();
 	};
 
@@ -57,12 +57,18 @@ function Navbar() {
 						Offers
 					</Link>
 				</li>
-		
+
 				<li>
-					<Link className="nav-item" to={"/credit"}>Credit</Link>
+					<Link className="nav-item" to={"/credit"}>
+						Credit
+					</Link>
 				</li>
 				<li>
-					<Link className="nav-item nav-item-border" to="/" onClick={handleLogout}>
+					<Link
+						className="nav-item nav-item-border"
+						to="/"
+						onClick={handleLogout}
+					>
 						Logout
 					</Link>
 				</li>

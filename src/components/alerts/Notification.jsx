@@ -1,6 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import '../style/Alerts.css'
+import '../../style/Alerts.css'
 
 const Notification = () => {
   return (

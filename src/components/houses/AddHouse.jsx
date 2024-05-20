@@ -4,7 +4,7 @@ import Standard from "../../const/Standard";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import HousesService from "../../service/HousesService";
-import Notification, { showNotification } from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function AddHouse() {
 	const [houseData, setHouseData] = useState({

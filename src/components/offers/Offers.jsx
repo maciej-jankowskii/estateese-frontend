@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import OffersService from "../../service/OffersService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification,{showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Offers() {
 	const [offers, setOffers] = useState([]);
@@ -33,28 +33,26 @@ function Offers() {
 		}
 	};
 
-
-
 	const deleteOffer = async (id) => {
-		try{
-			const token = localStorage.getItem("accessToken")
+		try {
+			const token = localStorage.getItem("accessToken");
 			await OffersService.deleteOffer(id, token);
-			showNotification("Offer deleted","success")
+			showNotification("Offer deleted", "success");
 			fetchOffers();
-		}catch(error){
+		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 
 	const soldOffer = async (id) => {
-		try{
-			const token = localStorage.getItem("accessToken")
+		try {
+			const token = localStorage.getItem("accessToken");
 			await OffersService.markOfferAsSold(id, token);
 			fetchOffers();
-		}catch(error){
+		} catch (error) {
 			console.log(error);
 		}
-	}
+	};
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
@@ -84,9 +82,24 @@ function Offers() {
 									<td>{offer.isBooked ? "Yes" : "No"}</td>
 									<td>{offer.isAvailable ? "Yes" : "No"}</td>
 									<td>
-										<Link className="action-btns" to={`/update-offer/${offer.id}`}>Update</Link>
-										<Link className="action-btns" onClick={()=> deleteOffer(offer.id)}>Delete</Link>
-										<Link className="action-btns" onClick={() => soldOffer(offer.id)}>Sold</Link>
+										<Link
+											className="action-btns"
+											to={`/update-offer/${offer.id}`}
+										>
+											Update
+										</Link>
+										<Link
+											className="action-btns"
+											onClick={() => deleteOffer(offer.id)}
+										>
+											Delete
+										</Link>
+										<Link
+											className="action-btns"
+											onClick={() => soldOffer(offer.id)}
+										>
+											Sold
+										</Link>
 									</td>
 								</tr>
 							))}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../service/AuthService";
-import Notification,{showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function RegisterPage() {
 	const [userData, setUserData] = useState({
@@ -39,17 +39,16 @@ function RegisterPage() {
 				email: "",
 				password: "",
 			});
-			showNotification("Employee register successfully", "success")
-			setErrors({})
-		
+			showNotification("Employee register successfully", "success");
+			setErrors({});
+
 			navi("/home");
 		} catch (error) {
-			if(error instanceof Object){
-				setErrors(error)
-			}else if(error){
-				showNotification("Email is taken", "error")
-				
-			}else{
+			if (error instanceof Object) {
+				setErrors(error);
+			} else if (error) {
+				showNotification("Email is taken", "error");
+			} else {
 				console.log(error);
 			}
 		}
@@ -70,7 +69,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
-						{errors.firstName && <p className="error-msg">{errors.firstName}</p>}
+					{errors.firstName && <p className="error-msg">{errors.firstName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Surname:</label>
 						<input
@@ -80,7 +79,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
-						{errors.lastName && <p className="error-msg">{errors.lastName}</p>}
+					{errors.lastName && <p className="error-msg">{errors.lastName}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">E-mail:</label>
 						<input
@@ -90,7 +89,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
-						{errors.email && <p className="error-msg">{errors.email}</p>}
+					{errors.email && <p className="error-msg">{errors.email}</p>}
 					<div className="input-box-post">
 						<label htmlFor="">Password:</label>
 						<input
@@ -100,7 +99,7 @@ function RegisterPage() {
 							onChange={handleInputChange}
 						/>
 					</div>
-						{errors.password && <p className="error-msg">{errors.password}</p>}
+					{errors.password && <p className="error-msg">{errors.password}</p>}
 					<button type="submit" className="my-btn">
 						Register
 					</button>

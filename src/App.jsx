@@ -11,7 +11,7 @@ import ApartmentDetails from "./components/apartments/ApartmentDetails";
 import Commercials from "./components/commercial/Commercials";
 import Houses from "./components/houses/Houses";
 import Lands from "./components/lands/Lands";
-import AddLand from './components/lands/AddLand';
+import AddLand from "./components/lands/AddLand";
 import Offers from "./components/offers/Offers";
 import AddApartment from "./components/apartments/AddApartment";
 import UpdateApartment from "./components/apartments/UpdateApartment";
@@ -29,63 +29,110 @@ import UpdateLand from "./components/lands/UpdateLand";
 import AddOffer from "./components/offers/AddOffer";
 import UpdateOffer from "./components/offers/UpdateOffer";
 import Credit from "./components/credit/Credit";
-import Notification from "./alerts/Notification";
+import Notification from "./components/alerts/Notification";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 function App() {
 	return (
 		<BrowserRouter>
-			<Notification></Notification>
-			<Navbar></Navbar>
+			<Notification />
+			<Navbar />
 
 			<Routes>
-				<Route path="/" element={<LoginPage></LoginPage>}></Route>
-				<Route path="/home/" element={<HomeComponent></HomeComponent>}></Route>
+				<Route path="/" element={<LoginPage />} />
+				<Route path="/home/" element={<HomeComponent />} />
 
-				<Route path="/apartments" element={<Apartments></Apartments>}></Route>
+				<Route
+					path="/apartments"
+					element={<PrivateRoute element={<Apartments />} />}
+				/>
 				<Route
 					path="apartment/:id"
-					element={<ApartmentDetails></ApartmentDetails>}
-				></Route>
+					element={<PrivateRoute element={<ApartmentDetails />} />}
+				/>
 				<Route
 					path="/add-apartment"
-					element={<AddApartment></AddApartment>}
-				></Route>
+					element={<PrivateRoute element={<AddApartment />} />}
+				/>
 				<Route
 					path="/update-apartment/:id"
-					element={<UpdateApartment></UpdateApartment>}
-				></Route>
-				<Route path="/commercials" element={<Commercials></Commercials>}></Route>
-				<Route path="/add-commercial" element={<AddCommercial></AddCommercial>}></Route>
+					element={<PrivateRoute element={<UpdateApartment />} />}
+				/>
+				<Route
+					path="/commercials"
+					element={<PrivateRoute element={<Commercials />} />}
+				/>
+				<Route
+					path="/add-commercial"
+					element={<PrivateRoute element={<AddCommercial />} />}
+				/>
 				<Route
 					path="commercial/:id"
-					element={<CommercialDetails></CommercialDetails>}
-				></Route>
+					element={<PrivateRoute element={<CommercialDetails />} />}
+				/>
 				<Route
 					path="/update-commercial/:id"
-					element={<UpdateCommercial></UpdateCommercial>}
-				></Route>
-				<Route path="/houses" element={<Houses></Houses>}></Route>
-				<Route path="/add-house" element={<AddHouse></AddHouse>}></Route>
-				<Route path="/house/:id" element={<HouseDetails></HouseDetails>}> </Route>
-				<Route path="/update-house/:id" element={<UpdateHouse></UpdateHouse>}></Route>
-				<Route path="/lands" element={<Lands></Lands>}></Route>
-				<Route path="/add-land" element={<AddLand></AddLand>}></Route>
-				<Route path="/land/:id" element={<LandDetails></LandDetails>}></Route>
-				<Route path="/update-land/:id" element={<UpdateLand></UpdateLand>}></Route>
-				
-				<Route path="/offers" element={<Offers></Offers>}></Route>
-				<Route path="/add-offer" element={<AddOffer></AddOffer>}></Route>
-				<Route path="/update-offer/:id" element={<UpdateOffer></UpdateOffer>}></Route>
-				<Route path="/register" element={<RegisterPage></RegisterPage>}></Route>
-				<Route path="/clients" element={<Clients></Clients>}></Route>
-				<Route path="/add-client" element={<AddClient></AddClient>}></Route>
-				<Route path="/offer/client/:id" element={<ClientOffers></ClientOffers>}></Route>
-				<Route path="/update-client/:id" element={<UpdateClient></UpdateClient>}></Route>
-				<Route path="/credit" element={<Credit></Credit>}></Route>
-	
+					element={<PrivateRoute element={<UpdateCommercial />} />}
+				/>
+				<Route path="/houses" element={<PrivateRoute element={<Houses />} />} />
+				<Route
+					path="/add-house"
+					element={<PrivateRoute element={<AddHouse />} />}
+				/>
+				<Route
+					path="/house/:id"
+					element={<PrivateRoute element={<HouseDetails />} />}
+				/>
+				<Route
+					path="/update-house/:id"
+					element={<PrivateRoute element={<UpdateHouse />} />}
+				/>
+				<Route path="/lands" element={<PrivateRoute element={<Lands />} />} />
+				<Route
+					path="/add-land"
+					element={<PrivateRoute element={<AddLand />} />}
+				/>
+				<Route
+					path="/land/:id"
+					element={<PrivateRoute element={<LandDetails />} />}
+				/>
+				<Route
+					path="/update-land/:id"
+					element={<PrivateRoute element={<UpdateLand />} />}
+				/>
+				<Route path="/offers" element={<PrivateRoute element={<Offers />} />} />
+				<Route
+					path="/add-offer"
+					element={<PrivateRoute element={<AddOffer />} />}
+				/>
+				<Route
+					path="/update-offer/:id"
+					element={<PrivateRoute element={<UpdateOffer />} />}
+				/>
+				<Route
+					path="/register"
+					element={<PrivateRoute element={<RegisterPage />} />}
+				/>
+				<Route
+					path="/clients"
+					element={<PrivateRoute element={<Clients />} />}
+				/>
+				<Route
+					path="/add-client"
+					element={<PrivateRoute element={<AddClient />} />}
+				/>
+				<Route
+					path="/offer/client/:id"
+					element={<PrivateRoute element={<ClientOffers />} />}
+				/>
+				<Route
+					path="/update-client/:id"
+					element={<PrivateRoute element={<UpdateClient />} />}
+				/>
+				<Route path="/credit" element={<PrivateRoute element={<Credit />} />} />
 			</Routes>
 
-			<Footer></Footer>
+			<Footer />
 		</BrowserRouter>
 	);
 }

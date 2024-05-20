@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import CommercialPropertyService from "../../service/CommercialPropertyService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, {showNotification} from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Commercials() {
 	const [commercials, setCommercials] = useState([]);
@@ -16,7 +16,11 @@ function Commercials() {
 	const fetchCommercials = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await CommercialPropertyService.getAllCommercials(token, page, pageSize);
+			const response = await CommercialPropertyService.getAllCommercials(
+				token,
+				page,
+				pageSize
+			);
 			setCommercials(response.data);
 		} catch (error) {
 			console.log(error);
@@ -24,15 +28,15 @@ function Commercials() {
 	};
 
 	const deleteCommercial = async (id) => {
-		try{
-			const token = localStorage.getItem('accessToken');
+		try {
+			const token = localStorage.getItem("accessToken");
 			await CommercialPropertyService.deleteCommercialProperty(id, token);
 			showNotification("Deleted successfully", "success");
 			fetchCommercials();
-		}catch(error){
+		} catch (error) {
 			showNotification(error.message, "error");
 		}
-	}
+	};
 
 	const nextPage = () => {
 		setPage(page + 1);
@@ -67,10 +71,18 @@ function Commercials() {
 									<td>{commercial.address}</td>
 									<td>{commercial.price} EUR</td>
 									<td>
-										<Link className="action-btns" to={`/commercial/${commercial.id}`}>
-										Details
+										<Link
+											className="action-btns"
+											to={`/commercial/${commercial.id}`}
+										>
+											Details
 										</Link>
-										<Link className="action-btns" to={`/update-commercial/${commercial.id}`}>Update</Link>
+										<Link
+											className="action-btns"
+											to={`/update-commercial/${commercial.id}`}
+										>
+											Update
+										</Link>
 										<Link
 											className="action-btns"
 											onClick={() => deleteCommercial(commercial.id)}

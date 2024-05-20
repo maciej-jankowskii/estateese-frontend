@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TypeOfLand from "../../const/TypeOfLand";
 import LandsService from "../../service/LandsService";
 import "../../style/PostStyle.css";
-import Notification, { showNotification } from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function AddLand() {
 	const [landData, setLandData] = useState({
@@ -44,9 +44,9 @@ function AddLand() {
 			showNotification("Land added successfully", "success");
 			navi("/lands");
 		} catch (error) {
-			if(error instanceof Object){
-				setErrors(error)
-			}else{
+			if (error instanceof Object) {
+				setErrors(error);
+			} else {
 				console.log(error);
 			}
 		}
@@ -117,7 +117,9 @@ function AddLand() {
 									))}
 								</select>
 							</div>
-							{errors.typeOfLand && <p className="error-msg">{errors.typeOfLand}</p>}
+							{errors.typeOfLand && (
+								<p className="error-msg">{errors.typeOfLand}</p>
+							)}
 
 							<div className="input-checkbox-group">
 								<div className="input-box-post">

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import HousesService from "../../service/HousesService";
-import '../../style/TablesStyle.css'
+import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../../alerts/Notification";
+import Notification, { showNotification } from "../alerts/Notification";
 
 function Houses() {
 	const [houses, setHouses] = useState([]);
@@ -23,7 +23,6 @@ function Houses() {
 		}
 	};
 
-
 	const nextPage = () => {
 		setPage(page + 1);
 	};
@@ -34,24 +33,24 @@ function Houses() {
 		}
 	};
 
-
 	const deleteHouse = async (id) => {
-		try{
-			const token = localStorage.getItem("accessToken")
+		try {
+			const token = localStorage.getItem("accessToken");
 			await HousesService.deleteHouse(id, token);
 			showNotification("House deleted", "success");
 			fetchHouses();
-		}catch(error){
+		} catch (error) {
 			showNotification("Cannot delete house assigned to an offer", "error");
 		}
-	}
+	};
 
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
-			<Link  className='add-resource-btn 'to="/add-house">Add house</Link>
+				<Link className="add-resource-btn " to="/add-house">
+					Add house
+				</Link>
 				<div className="table-container">
-					
 					<table className="box-table">
 						<thead>
 							<tr>
@@ -68,9 +67,21 @@ function Houses() {
 									<td>{house.address}</td>
 									<td>{house.price} EUR</td>
 									<td>
-										<Link className="action-btns" to={`/house/${house.id}`}>Details</Link>
-										<Link className="action-btns" to={`/update-house/${house.id}`}>Update</Link>
-										<Link className="action-btns" onClick={() => deleteHouse(house.id)}>Delete</Link>
+										<Link className="action-btns" to={`/house/${house.id}`}>
+											Details
+										</Link>
+										<Link
+											className="action-btns"
+											to={`/update-house/${house.id}`}
+										>
+											Update
+										</Link>
+										<Link
+											className="action-btns"
+											onClick={() => deleteHouse(house.id)}
+										>
+											Delete
+										</Link>
 									</td>
 								</tr>
 							))}
