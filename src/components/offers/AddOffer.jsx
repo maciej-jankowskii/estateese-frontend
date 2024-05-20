@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OffersService from "../../service/OffersService";
 import Notification, { showNotification } from "../alerts/Notification";
+import ClientService from "../../service/ClientService";
+import PropertyService from "../../service/PropertyService";
+import EmployeeService from '../../service/EmployeeService'
 
 function AddOffer() {
 	const [offerData, setOfferData] = useState({
@@ -17,6 +20,49 @@ function AddOffer() {
 		clientId: "",
 		propertyId: "",
 	});
+
+	const [clients, setClients] = useState([]);
+	const [properties, setProperties] = useState([]);
+	const [employees, setEmployees] = useState([]);
+
+	useEffect(() => {
+		fetchClients();
+		fetchProperties();
+		fetchEmployees();
+	}, []);
+	
+
+	const fetchClients = async () => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await ClientService.getAllClients(token); 
+			setClients(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const fetchProperties = async () => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await PropertyService.getAllProperties(token); 
+			setProperties(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const fetchEmployees = async () => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await EmployeeService.getAllEmployees(token); 
+			setEmployees(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+
 
 	const navi = useNavigate();
 
@@ -58,35 +104,57 @@ function AddOffer() {
 						<div className="first-input-box-post">
 							<div className="input-box-post">
 								<label htmlFor="">User:</label>
-								<input
-									type="number"
-									name="userId"
-									value={offerData.userId}
-									onChange={handleInputChange}
-								/>
+								<select
+								name="userId"
+								className="select"
+								value={offerData.userId}
+								onChange={handleInputChange}
+								>
+									<option value="">Select Employee</option>
+									{employees.map((empl) => (
+										<option key={empl.id} value={empl.id}>
+											{empl.firstName} {empl.lastName}
+										</option>
+									))}
+								</select>
 							</div>
 							{errors.userId && <p className="error-msg">{errors.userId}</p>}
 
 							<div className="input-box-post">
-								<label htmlFor="">Client:</label>
-								<input
-									type="number"
+								<label htmlFor="clientId">Client:</label>
+								<select
 									name="clientId"
+									className="select"
 									value={offerData.clientId}
 									onChange={handleInputChange}
-								/>
+								>
+									<option value="">Select Client</option>
+									{clients.map((client) => (
+										<option key={client.id} value={client.id}>
+											{client.firstName} {client.lastName}
+										</option>
+									))}
+								</select>
 							</div>
 							{errors.clientId && (
 								<p className="error-msg">{errors.clientId}</p>
 							)}
 							<div className="input-box-post">
 								<label htmlFor="">Property:</label>
-								<input
-									type="number"
-									name="propertyId"
-									value={offerData.propertyId}
-									onChange={handleInputChange}
-								/>
+								<select
+								name="propertyId"
+								className="select"
+								value={offerData.propertyId}
+								onChange={handleInputChange}
+								>
+									<option value="">Select Property</option>
+									{properties.map((property) => (
+										<option key={property.id} value={property.id}>
+											{property.address}, {property.price} EUR
+										</option>
+									))}
+
+								</select>
 							</div>
 							{errors.propertyId && (
 								<p className="error-msg">{errors.propertyId}</p>

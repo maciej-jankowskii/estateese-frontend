@@ -31,6 +31,7 @@ import UpdateOffer from "./components/offers/UpdateOffer";
 import Credit from "./components/credit/Credit";
 import Notification from "./components/alerts/Notification";
 import PrivateRoute from "./components/common/PrivateRoute";
+import Properties from "./components/properties/Properties";
 
 function App() {
 	return (
@@ -45,6 +46,10 @@ function App() {
 				<Route
 					path="/apartments"
 					element={<PrivateRoute element={<Apartments />} />}
+				/>
+				<Route
+					path="/properties"
+					element={<PrivateRoute element={<Properties/>} />}
 				/>
 				<Route
 					path="apartment/:id"

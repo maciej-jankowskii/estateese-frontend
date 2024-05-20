@@ -33,6 +33,9 @@ function Navbar() {
 					{showSubMenu && (
 						<ul className="sub-menu">
 							<li>
+								<Link to="/properties">All properties</Link>
+							</li>
+							<li>
 								<Link to="/apartments">Apartments</Link>
 							</li>
 							<li>

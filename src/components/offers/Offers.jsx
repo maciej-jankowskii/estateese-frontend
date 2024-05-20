@@ -3,9 +3,11 @@ import OffersService from "../../service/OffersService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
 import Notification, { showNotification } from "../alerts/Notification";
+import ClientService from "../../service/ClientService";
 
 function Offers() {
 	const [offers, setOffers] = useState([]);
+	const [clients, setClients] = useState({});
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
 
@@ -17,7 +19,22 @@ function Offers() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			const response = await OffersService.getAllOffers(token, page, pageSize);
-			setOffers(response.data);
+			const offersData = response.data;
+
+			const clientsData = await Promise.all(
+				offersData.map(async (offer) => {
+					const clientResponse = await ClientService.getClientById(token, offer.clientId);
+					return { ...clientResponse.data, clientId: offer.clientId };
+				})
+			);
+
+			const clientsMap = clientsData.reduce((acc, client) => {
+				acc[client.clientId] = client;
+				return acc;
+			}, {});
+
+			setClients(clientsMap);
+			setOffers(offersData);
 		} catch (error) {
 			console.log(error);
 		}
@@ -77,7 +94,7 @@ function Offers() {
 								<tr key={offer.id}>
 									<td>{offer.id}</td>
 									<td>{offer.userId}</td>
-									<td>{offer.clientId}</td>
+									<td>{clients[offer.clientId] ? `${clients[offer.clientId].firstName} ${clients[offer.clientId].lastName}` : "Loading..."}</td>
 									<td>{offer.propertyId}</td>
 									<td>{offer.isBooked ? "Yes" : "No"}</td>
 									<td>{offer.isAvailable ? "Yes" : "No"}</td>
