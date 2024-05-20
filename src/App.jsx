@@ -28,7 +28,6 @@ import LandDetails from "./components/lands/LandDetails";
 import UpdateLand from "./components/lands/UpdateLand";
 import AddOffer from "./components/offers/AddOffer";
 import UpdateOffer from "./components/offers/UpdateOffer";
-import Credit from "./components/credit/Credit";
 import Notification from "./components/alerts/Notification";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Properties from "./components/properties/Properties";
@@ -49,7 +48,7 @@ function App() {
 				/>
 				<Route
 					path="/properties"
-					element={<PrivateRoute element={<Properties/>} />}
+					element={<PrivateRoute element={<Properties />} />}
 				/>
 				<Route
 					path="apartment/:id"
@@ -134,7 +133,6 @@ function App() {
 					path="/update-client/:id"
 					element={<PrivateRoute element={<UpdateClient />} />}
 				/>
-				<Route path="/credit" element={<PrivateRoute element={<Credit />} />} />
 			</Routes>
 
 			<Footer />

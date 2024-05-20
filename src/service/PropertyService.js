@@ -17,6 +17,22 @@ class PropertyService {
             throw error;
         }
     }
+
+    static async searchProperties(token, keyword) {
+        try {
+            const response = await axios.get(`${PropertyService.BASE_URL}/search`, {
+                headers: { Authorization: `Bearer ${token}` },
+                params: { keyword }
+            });
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+    
+
+  
 }
 
 

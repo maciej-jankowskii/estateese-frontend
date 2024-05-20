@@ -60,12 +60,6 @@ function Navbar() {
 						Offers
 					</Link>
 				</li>
-
-				<li>
-					<Link className="nav-item" to={"/credit"}>
-						Credit
-					</Link>
-				</li>
 				<li>
 					<Link
 						className="nav-item nav-item-border"
