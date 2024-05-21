@@ -56,6 +56,7 @@ function AddOffer() {
 		try {
 			const token = localStorage.getItem("accessToken");
 			const response = await EmployeeService.getAllEmployees(token); 
+			console.log(response.data);
 			setEmployees(response.data);
 		} catch (error) {
 			console.log(error);
@@ -69,6 +70,7 @@ function AddOffer() {
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setOfferData({ ...offerData, [name]: value });
+		console.log(`Name: ${name}, Value: ${value}`);
 		setErrors({ ...errors, [name]: "" });
 	};
 
@@ -84,6 +86,13 @@ function AddOffer() {
 			await OffersService.addOffer(offerData, token);
 			setErrors({});
 			showNotification("Offer added successfully", "success");
+			setOfferData({   
+				userId: "",
+				clientId: "",
+				propertyId: "",
+				isBooked: "",
+				isAvailable: "",
+			});
 			navi("/offers");
 		} catch (error) {
 			if (error instanceof Object) {
@@ -113,7 +122,7 @@ function AddOffer() {
 									<option value="">Select Employee</option>
 									{employees.map((empl) => (
 										<option key={empl.id} value={empl.id}>
-											{empl.firstName} {empl.lastName}
+											{empl.firstName}
 										</option>
 									))}
 								</select>
@@ -128,7 +137,7 @@ function AddOffer() {
 									value={offerData.clientId}
 									onChange={handleInputChange}
 								>
-									<option value="">Select Client</option>
+									<option value="clientId">Select Client</option>
 									{clients.map((client) => (
 										<option key={client.id} value={client.id}>
 											{client.firstName} {client.lastName}
@@ -147,7 +156,7 @@ function AddOffer() {
 								value={offerData.propertyId}
 								onChange={handleInputChange}
 								>
-									<option value="">Select Property</option>
+									<option value="propertyId">Select Property</option>
 									{properties.map((property) => (
 										<option key={property.id} value={property.id}>
 											{property.address}, {property.price} EUR
