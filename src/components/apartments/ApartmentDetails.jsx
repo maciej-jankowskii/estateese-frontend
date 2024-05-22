@@ -2,9 +2,13 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApartmentService from "../../service/ApartmentService";
 import { Link } from "react-router-dom";
-import '../../style/DetailsStyle.css'
+import "../../style/DetailsStyle.css";
 
 function ApartmentDetails() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 
 	const [apartmentData, setApartmentData] = useState({
@@ -28,10 +32,14 @@ function ApartmentDetails() {
 		fetchApartmentById(id);
 	}, [id]);
 
+	/*
+		FETCH METHODS 
+	*/
+
 	const fetchApartmentById = async (id) => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			
+
 			const response = await ApartmentService.getApartmentById(token, id);
 			const {
 				address,
@@ -70,6 +78,10 @@ function ApartmentDetails() {
 		}
 	};
 
+	/*
+		JSX CODE 
+	*/
+
 	return (
 		<div className="main-content">
 			<div className="details-box">
@@ -80,15 +92,17 @@ function ApartmentDetails() {
 				<p>Area: {apartmentData.area}</p>
 				<p>Rooms: {apartmentData.rooms}</p>
 				<p>Bathrooms: {apartmentData.bathrooms}</p>
-				<p>Duplex: {apartmentData.duplexApartment ? 'Yes' : 'No'}</p>
+				<p>Duplex: {apartmentData.duplexApartment ? "Yes" : "No"}</p>
 				<p>Type of building: {apartmentData.buildingType}</p>
 				<p>Floor: {apartmentData.floor}</p>
-				<p>Elevator: {apartmentData.elevator ? 'Yes' : 'No'}</p>
-				<p>Balcony: {apartmentData.balcony ? 'Yes' : 'No'}</p>
-				<p>Garage: {apartmentData.garage ? 'Yes' : 'No'}</p>
+				<p>Elevator: {apartmentData.elevator ? "Yes" : "No"}</p>
+				<p>Balcony: {apartmentData.balcony ? "Yes" : "No"}</p>
+				<p>Garage: {apartmentData.garage ? "Yes" : "No"}</p>
 				<p>Construction year: {apartmentData.yearOfConstruction}</p>
 				<p>Standard: {apartmentData.standard}</p>
-				<Link className="back-btn" to="/apartments">Back</Link>
+				<Link className="back-btn" to="/apartments">
+					Back
+				</Link>
 			</div>
 		</div>
 	);

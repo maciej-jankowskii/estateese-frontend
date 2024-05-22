@@ -1,33 +1,40 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import CommercialPropertyService from '../../service/CommercialPropertyService';
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import CommercialPropertyService from "../../service/CommercialPropertyService";
 
 function CommercialDetails() {
-    const  {id} = useParams();
-    const [commercialData, setCommercialData] = useState({
-        address: "",
+	/*
+		REACT HOOKS 
+	*/
+
+	const { id } = useParams();
+	const [commercialData, setCommercialData] = useState({
+		address: "",
 		price: "",
 		description: "",
 		area: "",
 		rooms: "",
 		bathrooms: "",
-        buildingType: "",
-        floor: "",
-        typeOfBusiness: ''
-    })
+		buildingType: "",
+		floor: "",
+		typeOfBusiness: "",
+	});
 
-    useEffect(() => {
-        fetchCommercialById(id);
-    },[id])
-    
+	useEffect(() => {
+		fetchCommercialById(id);
+	}, [id]);
 
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
-    const fetchCommercialById = async(id) =>{
-        try{
-            const token = localStorage.getItem('accessToken');
-            const response = await CommercialPropertyService.getCommercialPropertyById(token, id);
+	const fetchCommercialById = async (id) => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response =
+				await CommercialPropertyService.getCommercialPropertyById(token, id);
 
-            const {
+			const {
 				address,
 				price,
 				description,
@@ -36,20 +43,31 @@ function CommercialDetails() {
 				bathrooms,
 				buildingType,
 				floor,
-                typeOfBusiness,
+				typeOfBusiness,
 			} = response.data;
-            setCommercialData({
-                address,price, description, area, rooms, bathrooms, buildingType,floor,typeOfBusiness
-            })
+			setCommercialData({
+				address,
+				price,
+				description,
+				area,
+				rooms,
+				bathrooms,
+				buildingType,
+				floor,
+				typeOfBusiness,
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	/*
+		JSX CODE 
+	*/
 
 
-
-        }catch(error){
-            console.log(error);
-        }
-    }
-  return (
-    <div className="main-content">
+	return (
+		<div className="main-content">
 			<div className="details-box">
 				<h2>Details</h2>
 				<p>Address: {commercialData.address}</p>
@@ -61,12 +79,12 @@ function CommercialDetails() {
 				<p>Type of building: {commercialData.buildingType}</p>
 				<p>Floor: {commercialData.floor}</p>
 				<p>Standard: {commercialData.typeOfBusiness}</p>
-				<Link className="back-btn" to="/commercials">Back</Link>
-                
+				<Link className="back-btn" to="/commercials">
+					Back
+				</Link>
 			</div>
 		</div>
-    
-  )
+	);
 }
 
-export default CommercialDetails
+export default CommercialDetails;

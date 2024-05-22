@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import OffersService from "../../service/OffersService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 import ClientService from "../../service/ClientService";
 import PropertyService from "../../service/PropertyService";
-import EmployeeService from '../../service/EmployeeService'
+import EmployeeService from "../../service/EmployeeService";
 
 function AddOffer() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [offerData, setOfferData] = useState({
 		userId: "",
 		clientId: "",
@@ -25,17 +29,22 @@ function AddOffer() {
 	const [properties, setProperties] = useState([]);
 	const [employees, setEmployees] = useState([]);
 
+	const navi = useNavigate();
+
 	useEffect(() => {
 		fetchClients();
 		fetchProperties();
 		fetchEmployees();
 	}, []);
-	
+
+	/*
+		FETCH METHODS 
+	*/
 
 	const fetchClients = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await ClientService.getAllClients(token); 
+			const response = await ClientService.getAllClients(token);
 			setClients(response.data);
 		} catch (error) {
 			console.log(error);
@@ -45,7 +54,7 @@ function AddOffer() {
 	const fetchProperties = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await PropertyService.getAllProperties(token); 
+			const response = await PropertyService.getAllProperties(token);
 			setProperties(response.data);
 		} catch (error) {
 			console.log(error);
@@ -55,7 +64,7 @@ function AddOffer() {
 	const fetchEmployees = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await EmployeeService.getAllEmployees(token); 
+			const response = await EmployeeService.getAllEmployees(token);
 			console.log(response.data);
 			setEmployees(response.data);
 		} catch (error) {
@@ -63,14 +72,13 @@ function AddOffer() {
 		}
 	};
 
-
-
-	const navi = useNavigate();
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setOfferData({ ...offerData, [name]: value });
-		console.log(`Name: ${name}, Value: ${value}`);
 		setErrors({ ...errors, [name]: "" });
 	};
 
@@ -86,7 +94,7 @@ function AddOffer() {
 			await OffersService.addOffer(offerData, token);
 			setErrors({});
 			showNotification("Offer added successfully", "success");
-			setOfferData({   
+			setOfferData({
 				userId: "",
 				clientId: "",
 				propertyId: "",
@@ -103,6 +111,10 @@ function AddOffer() {
 		}
 	};
 
+	/*
+		JSX CODE 
+	*/
+
 	return (
 		<div className="main-content">
 			<div className="main-content-post">
@@ -114,10 +126,10 @@ function AddOffer() {
 							<div className="input-box-post">
 								<label htmlFor="">User:</label>
 								<select
-								name="userId"
-								className="select"
-								value={offerData.userId}
-								onChange={handleInputChange}
+									name="userId"
+									className="select"
+									value={offerData.userId}
+									onChange={handleInputChange}
 								>
 									<option value="">Select Employee</option>
 									{employees.map((empl) => (
@@ -151,10 +163,10 @@ function AddOffer() {
 							<div className="input-box-post">
 								<label htmlFor="">Property:</label>
 								<select
-								name="propertyId"
-								className="select"
-								value={offerData.propertyId}
-								onChange={handleInputChange}
+									name="propertyId"
+									className="select"
+									value={offerData.propertyId}
+									onChange={handleInputChange}
 								>
 									<option value="propertyId">Select Property</option>
 									{properties.map((property) => (
@@ -162,7 +174,6 @@ function AddOffer() {
 											{property.address}, {property.price} EUR
 										</option>
 									))}
-
 								</select>
 							</div>
 							{errors.propertyId && (

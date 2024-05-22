@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import OffersService from "../../service/OffersService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 import ClientService from "../../service/ClientService";
 import PropertyService from "../../service/PropertyService";
-import EmployeeService from '../../service/EmployeeService'
+import EmployeeService from "../../service/EmployeeService";
 
 function UpdateOffer() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 	const [offerData, setOfferData] = useState({
 		userId: "",
@@ -32,9 +36,13 @@ function UpdateOffer() {
 	useEffect(() => {
 		fetchOfferById(id);
 		fetchClients();
-        fetchProperties();
-        fetchEmployees();
+		fetchProperties();
+		fetchEmployees();
 	}, [id]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchOfferById = async (id) => {
 		try {
@@ -62,19 +70,19 @@ function UpdateOffer() {
 	};
 
 	const fetchClients = async () => {
-        try {
-            const token = localStorage.getItem("accessToken");
-            const response = await ClientService.getAllClients(token); 
-            setClients(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await ClientService.getAllClients(token);
+			setClients(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const fetchProperties = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await PropertyService.getAllProperties(token); 
+			const response = await PropertyService.getAllProperties(token);
 			setProperties(response.data);
 		} catch (error) {
 			console.log(error);
@@ -84,7 +92,7 @@ function UpdateOffer() {
 	const fetchEmployees = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
-			const response = await EmployeeService.getAllEmployees(token); 
+			const response = await EmployeeService.getAllEmployees(token);
 			console.log(response.data);
 			setEmployees(response.data);
 		} catch (error) {
@@ -115,7 +123,7 @@ function UpdateOffer() {
 			const token = localStorage.getItem("accessToken");
 			const response = await OffersService.updateOffer(id, offerData, token);
 			showNotification("Offer updated successfully", "success");
-			setOfferData({   
+			setOfferData({
 				userId: "",
 				clientId: "",
 				propertyId: "",
@@ -132,6 +140,10 @@ function UpdateOffer() {
 		}
 	};
 
+	/*
+	 	JSX CODE 
+	*/
+
 	return (
 		<div className="main-content">
 			<div className="main-content-post">
@@ -143,10 +155,10 @@ function UpdateOffer() {
 							<div className="input-box-post">
 								<label htmlFor="">User:</label>
 								<select
-								name="userId"
-								className="select"
-								value={offerData.userId}
-								onChange={handleInputChange}
+									name="userId"
+									className="select"
+									value={offerData.userId}
+									onChange={handleInputChange}
 								>
 									<option value="">Select Employee</option>
 									{employees.map((empl) => (
@@ -180,10 +192,10 @@ function UpdateOffer() {
 							<div className="input-box-post">
 								<label htmlFor="">Property:</label>
 								<select
-								name="propertyId"
-								className="select"
-								value={offerData.propertyId}
-								onChange={handleInputChange}
+									name="propertyId"
+									className="select"
+									value={offerData.propertyId}
+									onChange={handleInputChange}
 								>
 									<option value="propertyId">Select Property</option>
 									{properties.map((property) => (
@@ -191,7 +203,6 @@ function UpdateOffer() {
 											{property.address}, {property.price} EUR
 										</option>
 									))}
-
 								</select>
 							</div>
 							{errors.propertyId && (
@@ -219,7 +230,6 @@ function UpdateOffer() {
 										name="isAvailable"
 										checked={offerData.isAvailable}
 										onChange={handleCheckboxChange}
-										
 									/>
 								</div>
 							</div>
@@ -232,7 +242,6 @@ function UpdateOffer() {
 				</form>
 			</div>
 		</div>
-		
 	);
 }
 

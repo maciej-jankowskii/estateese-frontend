@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ClientService from "../../service/ClientService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function UpdateClient() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 	const navi = useNavigate();
 
@@ -22,6 +26,10 @@ function UpdateClient() {
 	useEffect(() => {
 		fetchClientById(id);
 	}, [id]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchClientById = async (id) => {
 		try {
@@ -64,6 +72,10 @@ function UpdateClient() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

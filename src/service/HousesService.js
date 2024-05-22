@@ -7,7 +7,7 @@ class HousesService {
 		try {
 			const response = await axios.get(`${HousesService.BASE_URL}`, {
 				headers: { Authorization: `Bearer ${token}` },
-				params: {page, size: pageSize}
+				params: { page, size: pageSize },
 			});
 			return response;
 		} catch (error) {
@@ -39,11 +39,11 @@ class HousesService {
 			);
 			return response.data;
 		} catch (error) {
-			if(error.response && error.response.data){
-                throw error.response.data
-            }else{
-                throw new Error("Adding the house failed. Please try again")
-            }
+			if (error.response && error.response.data) {
+				throw error.response.data;
+			} else {
+				throw new Error("Adding the house failed. Please try again");
+			}
 		}
 	}
 
@@ -59,11 +59,11 @@ class HousesService {
 
 			return response;
 		} catch (error) {
-			if(error.response && error.response.data){
-                throw error.response.data
-            }else{
-                throw new Error("Adding the house failed. Please try again")
-            }
+			if (error.response && error.response.data) {
+				throw error.response.data;
+			} else {
+				throw new Error("Adding the house failed. Please try again");
+			}
 		}
 	}
 
@@ -78,10 +78,10 @@ class HousesService {
 			return respone;
 		} catch (error) {
 			if (error.response && error.response.status === 403) {
-                throw new Error(error.response.data);
-              } else {
-                throw error;
-              }
+				throw new Error(error.response.data);
+			} else {
+				throw error;
+			}
 		}
 	}
 }

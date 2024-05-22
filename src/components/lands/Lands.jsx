@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import LandsService from "../../service/LandsService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function Lands() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [lands, setLands] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
@@ -13,6 +17,10 @@ function Lands() {
 		fetchLands();
 	}, [page, pageSize]);
 
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
+
 	const fetchLands = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
@@ -20,16 +28,6 @@ function Lands() {
 			setLands(response.data);
 		} catch (error) {
 			console.log(error);
-		}
-	};
-
-	const nextPage = () => {
-		setPage(page + 1);
-	};
-
-	const prevPage = () => {
-		if (page > 0) {
-			setPage(page - 1);
 		}
 	};
 
@@ -43,6 +41,25 @@ function Lands() {
 			showNotification("Cannot delete house assigned to an offer", "error");
 		}
 	};
+
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
+
+	const nextPage = () => {
+		setPage(page + 1);
+	};
+
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
+
+	/*
+		JSX CODE 
+	*/
+
 	return (
 		<div className="main-content">
 			<div className="main-content-table">

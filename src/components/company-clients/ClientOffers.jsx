@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ClientService from "../../service/ClientService";
 
 function ClientOffers() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 	const navi = useNavigate();
 	const [offerData, setOfferData] = useState([]);
@@ -10,6 +14,10 @@ function ClientOffers() {
 	useEffect(() => {
 		fetchOffersByClient(id);
 	}, [id]);
+
+	/*
+		FETCH OFFERS 
+	*/
 
 	const fetchOffersByClient = async (clientId) => {
 		try {
@@ -21,6 +29,10 @@ function ClientOffers() {
 			console.log(error);
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

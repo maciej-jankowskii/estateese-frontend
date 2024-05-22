@@ -2,9 +2,13 @@ import { useState } from "react";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../service/AuthService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function RegisterPage() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [userData, setUserData] = useState({
 		firstName: "",
 		lastName: "",
@@ -19,6 +23,10 @@ function RegisterPage() {
 	});
 
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -53,6 +61,10 @@ function RegisterPage() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

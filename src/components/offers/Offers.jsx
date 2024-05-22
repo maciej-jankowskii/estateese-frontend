@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import OffersService from "../../service/OffersService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 import ClientService from "../../service/ClientService";
 
 function Offers() {
+	/*
+		REACT HOOKS 
+	*/
 	const [offers, setOffers] = useState([]);
 	const [clients, setClients] = useState({});
 	const [page, setPage] = useState(0);
@@ -15,6 +18,10 @@ function Offers() {
 		fetchOffers();
 	}, [page, pageSize]);
 
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
+
 	const fetchOffers = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
@@ -23,7 +30,10 @@ function Offers() {
 
 			const clientsData = await Promise.all(
 				offersData.map(async (offer) => {
-					const clientResponse = await ClientService.getClientById(token, offer.clientId);
+					const clientResponse = await ClientService.getClientById(
+						token,
+						offer.clientId
+					);
 					return { ...clientResponse.data, clientId: offer.clientId };
 				})
 			);
@@ -37,16 +47,6 @@ function Offers() {
 			setOffers(offersData);
 		} catch (error) {
 			console.log(error);
-		}
-	};
-
-	const nextPage = () => {
-		setPage(page + 1);
-	};
-
-	const prevPage = () => {
-		if (page > 0) {
-			setPage(page - 1);
 		}
 	};
 
@@ -70,6 +70,24 @@ function Offers() {
 			console.log(error);
 		}
 	};
+
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
+
+	const nextPage = () => {
+		setPage(page + 1);
+	};
+
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
+
+	/*
+		JSX CODE 
+	*/
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
@@ -94,7 +112,13 @@ function Offers() {
 								<tr key={offer.id}>
 									<td>{offer.id}</td>
 									<td>{offer.userId}</td>
-									<td>{clients[offer.clientId] ? `${clients[offer.clientId].firstName} ${clients[offer.clientId].lastName}` : "Loading..."}</td>
+									<td>
+										{clients[offer.clientId]
+											? `${clients[offer.clientId].firstName} ${
+													clients[offer.clientId].lastName
+											}`
+											: "Loading..."}
+									</td>
 									<td>{offer.propertyId}</td>
 									<td>{offer.isBooked ? "Yes" : "No"}</td>
 									<td>{offer.isAvailable ? "Yes" : "No"}</td>

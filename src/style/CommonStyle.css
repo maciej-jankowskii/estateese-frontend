@@ -108,7 +108,7 @@
 	transition: 0.3s;
 }
 
-.login-btn:hover{
+.login-btn:hover {
 	background-color: black;
 	color: white;
 }
@@ -177,12 +177,7 @@
 .nav-item-logo {
 	text-decoration: none;
 	color: white;
-	
 }
-
-
-
-
 
 .nav-item {
 	text-decoration: none;
@@ -190,7 +185,7 @@
 	transition: 0.3s;
 }
 
-.nav-item:hover{
+.nav-item:hover {
 	color: grey;
 }
 

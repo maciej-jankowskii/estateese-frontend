@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import ClientService from "../../service/ClientService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function Clients() {
+	/*
+		REACT HOOKS 
+	*/
 	const [clients, setClients] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
@@ -12,6 +15,10 @@ function Clients() {
 	useEffect(() => {
 		fetchClients();
 	}, [page, pageSize]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchClients = async () => {
 		try {
@@ -34,6 +41,10 @@ function Clients() {
 		}
 	};
 
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
+
 	const nextPage = () => {
 		setPage(page + 1);
 	};
@@ -43,6 +54,10 @@ function Clients() {
 			setPage(page - 1);
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

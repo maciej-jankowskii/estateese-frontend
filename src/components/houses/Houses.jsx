@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import HousesService from "../../service/HousesService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function Houses() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [houses, setHouses] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
@@ -13,6 +17,10 @@ function Houses() {
 		fetchHouses();
 	}, [page, pageSize]);
 
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
+
 	const fetchHouses = async () => {
 		try {
 			const token = localStorage.getItem("accessToken");
@@ -20,16 +28,6 @@ function Houses() {
 			setHouses(response.data);
 		} catch (error) {
 			console.log(error.response);
-		}
-	};
-
-	const nextPage = () => {
-		setPage(page + 1);
-	};
-
-	const prevPage = () => {
-		if (page > 0) {
-			setPage(page - 1);
 		}
 	};
 
@@ -43,6 +41,24 @@ function Houses() {
 			showNotification("Cannot delete house assigned to an offer", "error");
 		}
 	};
+
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
+
+	const nextPage = () => {
+		setPage(page + 1);
+	};
+
+	const prevPage = () => {
+		if (page > 0) {
+			setPage(page - 1);
+		}
+	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

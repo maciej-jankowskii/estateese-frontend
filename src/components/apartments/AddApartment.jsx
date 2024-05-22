@@ -4,9 +4,13 @@ import ApartmentService from "../../service/ApartmentService";
 import Standard from "../../const/Standard";
 import BuildingType from "../../const/BuildingType";
 import "../../style/PostStyle.css";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function AddApartment() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [apartmentData, setApartmentData] = useState({
 		address: "",
 		price: "",
@@ -35,6 +39,10 @@ function AddApartment() {
 	});
 
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -65,6 +73,10 @@ function AddApartment() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

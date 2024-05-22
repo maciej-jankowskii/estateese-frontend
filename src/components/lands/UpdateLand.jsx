@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import LandsService from "../../service/LandsService";
 import TypeOfLand from "../../const/TypeOfLand";
 import "../../style/PostStyle.css";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function UpdateLand() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 	const navi = useNavigate();
 
@@ -28,6 +32,10 @@ function UpdateLand() {
 	useEffect(() => {
 		fetchLandById(id);
 	}, [id]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchLandById = async (id) => {
 		try {
@@ -79,6 +87,10 @@ function UpdateLand() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

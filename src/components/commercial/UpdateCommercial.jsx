@@ -6,6 +6,10 @@ import TypeOfBusiness from "../../const/TypeOfBusiness";
 import Notification, { showNotification } from "../alerts/Notification";
 
 function UpdateCommercial() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const { id } = useParams();
 	const navi = useNavigate();
 
@@ -34,6 +38,10 @@ function UpdateCommercial() {
 	useEffect(() => {
 		fetchCommercialById(id);
 	}, [id]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchCommercialById = async (id) => {
 		try {
@@ -97,6 +105,10 @@ function UpdateCommercial() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

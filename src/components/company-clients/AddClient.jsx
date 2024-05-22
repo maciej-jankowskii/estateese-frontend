@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClientService from "../../service/ClientService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function AddClient() {
+	/*
+		REACT HOOKS 
+	*/
 	const [clientData, setClientData] = useState({
 		firstName: "",
 		lastName: "",
@@ -17,6 +20,10 @@ function AddClient() {
 	});
 
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -41,6 +48,10 @@ function AddClient() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import TypeOfLand from "../../const/TypeOfLand";
 import LandsService from "../../service/LandsService";
 import "../../style/PostStyle.css";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function AddLand() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [landData, setLandData] = useState({
 		address: "",
 		price: "",
@@ -23,6 +27,10 @@ function AddLand() {
 	});
 
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -51,6 +59,10 @@ function AddLand() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

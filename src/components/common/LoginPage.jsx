@@ -2,13 +2,21 @@ import { useState } from "react";
 import "../../style/CommonStyle.css";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../service/AuthService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function LoginPage() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleSubmitLogin = async (e) => {
 		e.preventDefault();
@@ -30,6 +38,10 @@ function LoginPage() {
 			setError("Invalid e-mail or password");
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="container">

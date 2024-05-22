@@ -2,10 +2,18 @@ import { Link } from "react-router-dom";
 import AuthService from "../../service/AuthService";
 import "../../style/CommonStyle.css";
 import { useState } from "react";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function Navbar() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [showSubMenu, setShowSubMenu] = useState(false);
+
+	/*
+		FORM EVENT METHODS HANDLING 
+	*/
 
 	const handleLogout = () => {
 		showNotification("Log out successfully", "success");
@@ -15,6 +23,10 @@ function Navbar() {
 	const toggleSubMenu = () => {
 		setShowSubMenu(!showSubMenu);
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<nav className="navigation">

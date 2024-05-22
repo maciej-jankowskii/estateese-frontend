@@ -4,9 +4,12 @@ import HousesService from "../../service/HousesService";
 import Standard from "../../const/Standard";
 import BuildingType from "../../const/BuildingType";
 import "../../style/PostStyle.css";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function UpdateHouse() {
+	/*
+		REACT HOOKS 
+	*/
 	const { id } = useParams();
 	const navi = useNavigate();
 
@@ -40,6 +43,10 @@ function UpdateHouse() {
 	useEffect(() => {
 		fetchHouseById(id);
 	}, [id]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchHouseById = async (id) => {
 		try {
@@ -111,6 +118,10 @@ function UpdateHouse() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

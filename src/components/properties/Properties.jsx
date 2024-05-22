@@ -1,44 +1,65 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../../style/TablesStyle.css";
 import PropertyService from "../../service/PropertyService";
 
 function Properties() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [properties, setProperties] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
 	const [keyword, setKeyword] = useState("");
 
 	useEffect(() => {
-    if (keyword) {
-        searchProperties();
-    } else {
-        fetchProperties();
-    }
-}, [page, pageSize, keyword]);
+		if (keyword) {
+			searchProperties();
+		} else {
+			fetchProperties();
+		}
+	}, [page, pageSize, keyword]);
 
-const fetchProperties = async () => {
-  try {
-      const token = localStorage.getItem("accessToken");
-      const response = await PropertyService.getAllProperties(token, page, pageSize);
-      setProperties(response.data);
-  } catch (error) {
-      console.log(error);
-  }
-};
-const searchProperties = async () => {
-  try {
-      const token = localStorage.getItem("accessToken");
-      const response = await PropertyService.searchProperties(token, keyword, page, pageSize);
-      setProperties(response.data);
-  } catch (error) {
-      console.log(error);
-  }
-};
+	/*
+	FETCH AND FORM EVENT HANDLING METHODS 
+*/
+
+	const fetchProperties = async () => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await PropertyService.getAllProperties(
+				token,
+				page,
+				pageSize
+			);
+			setProperties(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	const searchProperties = async () => {
+		try {
+			const token = localStorage.getItem("accessToken");
+			const response = await PropertyService.searchProperties(
+				token,
+				keyword,
+				page,
+				pageSize
+			);
+			setProperties(response.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const handleSearch = (e) => {
 		setKeyword(e.target.value);
-    setPage(0)
+		setPage(0);
 	};
+
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
 
 	const nextPage = () => {
 		setPage(page + 1);
@@ -50,13 +71,16 @@ const searchProperties = async () => {
 		}
 	};
 
-  
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">
 			<div className="main-content-table">
 				<div className="table-container">
-					<input className="search"
+					<input
+						className="search"
 						type="text"
 						placeholder="Search by address, ID or description"
 						value={keyword}

@@ -4,9 +4,13 @@ import Standard from "../../const/Standard";
 import "../../style/PostStyle.css";
 import { useNavigate } from "react-router-dom";
 import HousesService from "../../service/HousesService";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function AddHouse() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [houseData, setHouseData] = useState({
 		address: "",
 		price: "",
@@ -36,6 +40,10 @@ function AddHouse() {
 
 	const navi = useNavigate();
 
+	/*
+		FROM EVENT HANDLING METHODS 
+	*/
+
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
 		setHouseData({ ...houseData, [name]: value });
@@ -63,6 +71,10 @@ function AddHouse() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

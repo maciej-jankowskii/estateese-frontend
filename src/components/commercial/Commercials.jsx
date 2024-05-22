@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import CommercialPropertyService from "../../service/CommercialPropertyService";
 import "../../style/TablesStyle.css";
 import { Link } from "react-router-dom";
-import Notification, { showNotification } from "../alerts/Notification";
+import { showNotification } from "../alerts/Notification";
 
 function Commercials() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [commercials, setCommercials] = useState([]);
 	const [page, setPage] = useState(0);
 	const [pageSize, setPageSize] = useState(5);
@@ -12,6 +16,10 @@ function Commercials() {
 	useEffect(() => {
 		fetchCommercials();
 	}, [page, pageSize]);
+
+	/*
+		FETCH AND FORM EVENT HANDLING METHODS 
+	*/
 
 	const fetchCommercials = async () => {
 		try {
@@ -38,6 +46,10 @@ function Commercials() {
 		}
 	};
 
+	/*
+		PREV/NEXT PAGE METHODS 
+	*/
+
 	const nextPage = () => {
 		setPage(page + 1);
 	};
@@ -47,6 +59,10 @@ function Commercials() {
 			setPage(page - 1);
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">

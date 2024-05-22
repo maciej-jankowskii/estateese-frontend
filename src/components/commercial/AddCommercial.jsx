@@ -7,6 +7,10 @@ import CommercialPropertyService from "../../service/CommercialPropertyService";
 import Notification, { showNotification } from "../alerts/Notification";
 
 function AddCommercial() {
+	/*
+		REACT HOOKS 
+	*/
+
 	const [commercialData, setCommercialData] = useState({
 		address: "",
 		price: "",
@@ -30,6 +34,10 @@ function AddCommercial() {
 	});
 
 	const navi = useNavigate();
+
+	/*
+		FORM EVENT HANDLING METHODS 
+	*/
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
@@ -57,6 +65,10 @@ function AddCommercial() {
 			}
 		}
 	};
+
+	/*
+		JSX CODE 
+	*/
 
 	return (
 		<div className="main-content">
