@@ -1,8 +1,13 @@
-# React + Vite
+# Estateese
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Backend code has been written after about six months of learning Java and Spring. I am currently creating the graphical interface using the React library. This is an application where I used my professional experience since I worked for about 2 years as a real estate agent. It is a simple CRUD application. The application allows users to register, log in to their accounts, register employees, add various types of properties, edit and delete them, and create offers based on them. I used basic HTTP requests such as POST, GET, PUT, and DELETE.
 
-Currently, two official plugins are available:
+## 1. If You want, here You will find the back-end code:
+<p><a href="https://github.com/maciej-jankowskii/estateese-backend">Click here -> Estateese</a></p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 2. Demo on YouTube:
+Coming soon
+
+## 3. Run with Docker:
+Coming soon
+
