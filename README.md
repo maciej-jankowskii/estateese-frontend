@@ -9,5 +9,7 @@
 Coming soon
 
 ## 3. Run with Docker:
-Coming soon
+To run the entire React + Spring application, please go back to the repository with the backend. There it is explained how to do it.
+<p><a href="https://github.com/maciej-jankowskii/estateese-backend">Click here</a></p>
+
 
